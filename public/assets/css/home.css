@@ -1,21 +1,6 @@
-/* Animation */
-@keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-  
-  /* Hero Section Gradient */
-  .hero-section {
-    background: linear-gradient(to right, #6366f1, #4338ca); /* Indigo gradient */
-  }
-  
