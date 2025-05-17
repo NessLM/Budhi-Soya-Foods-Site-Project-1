@@ -59,7 +59,7 @@
     text-decoration: underline;
     text-decoration-color: white;
     -moz-text-decoration-color: white;
-    text-underline-offset: 5px;
+    text-underline-offset: 10px;
 }
 
   .nav-links a::before{

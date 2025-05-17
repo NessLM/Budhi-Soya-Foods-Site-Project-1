@@ -9,6 +9,13 @@
 </head>
 <body>
   <x-navbar></x-navbar>
-  <h1>Ini Homw</h1>
+  <section>
+    <div>
+
+    </div>
+    <div>
+      
+    </div>
+  </section>
 </body>
 </html>
