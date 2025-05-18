@@ -21,22 +21,22 @@ class AuthController extends Controller
         // Tentukan field login: email atau username
         $field = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
     
-        // Cek apakah user dengan email/username tersebut ada
-        $user = \App\Models\User::where($field, $loginInput)->first();
+        // Gabungkan field login dan password ke dalam array credentials
+        $loginData = [
+            $field => $loginInput,
+            'password' => $password
+        ];
     
-        if (!$user) {
-            return back()->with('error', 'Username atau email Anda tidak ditemukan.')->withInput();
+        // Coba login dengan Auth::attempt()
+        if (Auth::attempt($loginData)) {
+            $request->session()->regenerate(); // cegah session fixation
+            return redirect()->intended('/');
         }
     
-        // Cek apakah password cocok
-        if (!Hash::check($password, $user->password)) {
-            return back()->with('error', 'Password Anda salah.')->withInput();
-        }
-    
-        // Login berhasil
-        Auth::login($user);
-        return redirect('/');
+        // Jika gagal login
+        return back()->with('error', 'Username, email, atau password salah.')->withInput();
     }
+    
     
     public function showRegister() {
         return view('auth.register');
@@ -48,18 +48,25 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
-
+    
         User::create([
             'username' => $request->username,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+    
         return redirect('/login')->with('success', 'Registrasi berhasil!');
     }
+    
 
-    public function logout() {
+    public function logout(Request $request) {
         Auth::logout();
-        return redirect('/login');
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
     }
+    
 }

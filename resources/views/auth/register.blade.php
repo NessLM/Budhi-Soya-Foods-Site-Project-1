@@ -10,7 +10,7 @@
         <h2>Daftar di BudhiSoyaFoods</h2>
         <p class="description">Selamat datang, pengguna baru! Buat akunmu sekarang</p>
 
-        <form method="POST" action="{{ route('register.custom') }}">
+        <form method="POST" action="{{ route('register.user') }}">
             @csrf
 
             <label for="username">Username</label>
@@ -45,5 +45,7 @@
             </div>
         </form>
     </div>
+
+    <script src="assets/js/register-validation.js"></script>
 </body>
 </html>

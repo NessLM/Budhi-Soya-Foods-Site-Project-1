@@ -5,41 +5,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - BudhiSoyaFoods</title>
-    <link rel="stylesheet" href="assets/css/auth.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
 </head>
 
 <body>
     <div class="form-container">
-        <h2>Login di BudhiSoyaFoods</h2>
+        <h2 class="form-title">Login di <span class="brand">BudhiSoyaFoods</span></h2>
         <p class="description">Selamat datang kembali, pengguna setia!</p>
 
-        <!-- resources/views/auth/login.blade.php -->
-        <form method="POST" action="{{ route('login.custom') }}">
+        <form method="POST" action="{{ route('login.user') }}">
             @csrf
 
-            <h2>Login di BudhiSoyaFoods</h2>
-            <p>Selamat datang kembali, pengguna lama!</p>
+            <div class="form-group">
+                <label for="login">Username atau Email</label>
+                <input type="text" id="login" name="login" required>
+            </div>
 
-            <label for="login">Username atau Email</label><br>
-            <input type="text" id="login" name="login" value="{{ old('login') }}" required><br>
-
-            <label for="password">Password</label><br>
-            <input type="password" id="password" name="password" required><br>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
 
             {{-- ERROR MESSAGE --}}
             @if(session('error'))
-                <p style="color: red; margin-top: 10px;">{{ session('error') }}</p>
+                <p class="error-message">{{ session('error') }}</p>
             @endif
 
-            <button type="submit">Login</button>
+            <button type="submit" class="submit-button">Login</button>
 
-            <p style="margin-top: 10px;">
+            <p class="register-link">
                 Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a>
             </p>
         </form>
-
     </div>
-
 </body>
-
 </html>

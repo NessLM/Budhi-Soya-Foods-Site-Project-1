@@ -1,0 +1,86 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-login-box {
+    background-color: #fff;
+    border: 2px solid #198754;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.08);
+    width: 350px;
+}
+
+.admin-login-box h2 {
+    color: #198754;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.admin-login-box .desc {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.admin-login-box label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.admin-login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.admin-login-box input:focus {
+    border-color: #198754;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #198754;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #157347;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
