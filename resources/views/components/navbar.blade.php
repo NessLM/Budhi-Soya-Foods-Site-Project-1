@@ -22,7 +22,12 @@
         </li>
         <li><a href="/contact">Kontak Kami</a></li>
         <li><a href="/aboutus">Tentang Kami</a></li>
+    
+        @auth
+            <li><a href="#">{{ Auth::user()->username }}</a></li>
+        @endauth
     </ul>
+    
 
     <ul class="loginul">
         @auth
@@ -31,19 +36,18 @@
                 <div class="dropdown-content">
                     <a href="/pelanggan">Profile</a>
                     <a href="/pesanan">Pesanan Saya</a>
-                    <a href="/logout"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="margin: 0;">
                         @csrf
+                        <button type="submit" class="logout-btn">Logout</button>
                     </form>
                 </div>
             </li>
         @else
-            <li class="login-btn"><a href="/login">Login</a></li>
+            <li class="login-btn"><a href="/login">Masuk</a></li>
+            <li class="register-btn"><a href="/register">Daftar</a></li>
         @endauth
     </ul>
+    
     
 
 </nav>

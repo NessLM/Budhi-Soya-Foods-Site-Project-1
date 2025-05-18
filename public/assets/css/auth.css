@@ -1,0 +1,104 @@
+/* public/css/auth.css - BudhiSoyaFoods Themed */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafb; /* Putih lembut */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 420px;
+    border: 2px solid #4ade80; /* hijau bayam cerah */
+}
+
+.form-container h2 {
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: #166534; /* hijau tua */
+}
+
+.form-container p.description {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #475569;
+    font-size: 14px;
+}
+
+label {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f0fdf4; /* hijau super muda */
+}
+
+input:focus {
+    border-color: #4ade80;
+    outline: none;
+    background-color: #ecfdf5;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4ade80;
+    color: #166534;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #22c55e;
+    color: #ffffff;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: -6px;
+    margin-bottom: 8px;
+}
+
+.success-message {
+    color: #16a34a;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+}
+
+.form-footer a {
+    color: #0f766e;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+    color: #065f46;
+}
