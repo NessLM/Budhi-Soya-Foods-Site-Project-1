@@ -10,29 +10,43 @@
 <body class="font-sans bg-white">
   <x-navbar></x-navbar>
 
-  <section class="home-container">
-    <!-- Kiri: Teks dan Tombol -->
-    <div class="home-text">
-      <h1 class="home-title">Soya Foods</h1>
-      <p class="home-desc">Bergizi, organik, dan dibuat secara lokal dengan penuh cinta. Mulailah gaya hidup sehatmu bersama kami.</p>
-      <button class="home-button">Pesan Produk</button>
-    </div>
-
-    <!-- Kanan: Gambar -->
-    <div class="home-image">
-      <img src="/assets/img/hero-img.jpg" alt="Soya Dessert" />
+  <section class="hero-section">
+    <div class="hero-section-item">
+      <div class="hero-section-content">
+        <h1>Soya Foods</h1>
+        <p>Bergizi, organik, dan dibuat secara lokal dengan penuh cinta. Mulailah gaya hidup sehatmu bersama kami</p>
+        <button>Pesan Produk</button>
+      </div>
+      <div class="hero-image" ></div>
     </div>
   </section>
 
-  <!-- Produk Utama -->
-  <section class="produk-section">
-    <h2 class="produk-title">Produk Utama Kami</h2>
-    <div class="produk-container">
-      <div class="produk-item"></div>
-      <div class="produk-item"></div>
-      <div class="produk-item produk-highlight"></div>
+  <!-- Section -->
+  <section class="body-section">
+    <div class="main-product">
+      <h2>Produk Utama Kami</h2>
+      <div class="main-product-container">
+        
+        {{-- <div class="product-card">
+          <div class="product-image">
+            <img src="produk.jpg" alt="Produk Utama">
+          </div>
+          <div class="product-info">
+            <h3>Judul Produk</h3>
+            <p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum..</p>
+            <div class="stock-price">
+              <span>Stok: 25</span>
+              <span>Harga: Rp 50.000,00</span>
+            </div>
+            <button class="btn-detail">Detail Produk</button>
+          </div> --}}
+        </div>
+        
+      </div>
     </div>
   </section>
+
+
 </body>
 
 </html>

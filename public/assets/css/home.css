@@ -5,107 +5,179 @@
   box-sizing: border-box;
 }
 
-/* Struktur utama */
-.home-container {
-  display: flex;
-  flex-wrap: wrap;
+.hero-section {
   background: white;
-  z-index: -1;
   position: relative;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
 }
 
-/* Kiri */
-.home-text {
-  flex: 1 1 50%;
-  background: linear-gradient(to bottom right, #facc15, #d97706);
-  padding: 4rem 2rem;
-  color: #000000;
+.hero-section-item {
+  background: linear-gradient(to bottom right, #FEDD65, #ab8603);
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 500px;
+}
+
+.hero-section-content {
+  flex: 1 1 100px;
+  font-family: Lato, sans-serif;
+  padding: 2em;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.home-title {
-  font-size: 2.25rem;
+.hero-section-content h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.home-desc {
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
+.hero-section-content p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.8;
+  letter-spacing: 0.12rem;
 }
 
-.home-button {
-  background-color: #ca8a04;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
+.hero-section-content button {
+  margin-top: 1.5rem;
+  padding: 0.75em 0.5em;
+  width: 30%;
+  font-size: 1rem;
+  background-color: #ab8603;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.home-button:hover {
-  background-color: #a16207;
+.hero-image {
+  flex: 1 1 300px;
+  background-image: url("/assets/img/hero-img.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+  min-width: 400px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%);
 }
 
-/* Kanan */
-.home-image {
-  flex: 1 1 50%;
+/* Di bawah resolusi 768px, clip-path di-nonaktifkan */
+@media screen and (max-width: 768px) {
+  .hero-image {
+    clip-path: none;
+  }
+  .hero-section-content p {
+    padding-right: 0em;
+    margin: auto;
+  }
+  .hero-section-content {
+    text-align: center;
+    align-items: center;
+  }
 }
 
-.home-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Produk Utama */
-.produk-section {
+.body-section {
   background-color: #fff;
-  margin-top: -40px;
+  margin-top: -25px;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  padding: 4rem 2rem;
+  padding: 4em 2em;
   text-align: center;
   z-index: 10;
   position: relative;
 }
 
-.produk-title {
+.main-product {
+  align-items: center;
+}
+
+.main-product h2 {
   font-size: 1.75rem;
   font-weight: bold;
   margin-bottom: 2rem;
   position: relative;
 }
 
-.produk-title::after {
+.main-product h2::after {
   content: "";
   display: block;
-  width: 80px;
+  width: 10rem;
   height: 4px;
   background: #10b981;
-  margin: 0.5rem auto 0 auto;
+  margin: 0.25rem auto 0 auto;
   border-radius: 2px;
 }
 
-.produk-container {
+.main-product-container {
   display: flex;
-  gap: 1.5rem;
   justify-content: center;
+  align-items: center;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 
-.produk-item {
-  background-color: #15803d;
-  width: 150px;
-  height: 150px;
-  border-radius: 20px;
+
+
+/* .product-card {
+  display: flex;
+  background-color: #3f704d;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.produk-highlight {
-  border: 4px solid #3b82f6;
+.product-image img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
 }
+
+.product-info {
+  color: #fff;
+  padding: 2rem;
+  text-align: left;
+  flex: 1;
+}
+
+.product-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.product-info .desc {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.stock-price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.btn-detail {
+  background-color: #fbbf24;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn-detail:hover {
+  background-color: #f59e0b;
+} */

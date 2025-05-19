@@ -9,6 +9,7 @@
   font-family: 'Lato', sans-serif;
   flex-wrap: wrap;
   position: relative;
+  z-index: 1;
 }
 
 /* Logo */
@@ -18,19 +19,25 @@
   text-decoration: none;
 }
 
-.logo-img {
+.logo img {
   position: absolute;
-  top: 0px; /* sebelumnya margin-top: 30px */
+  top: 0px; 
   right: auto;
   left: auto;
   height: 100px;
-  margin-right: 10px;
   display: none;
 }
 
-.logo-img[src] {
+.logo img[src] {
   display: inline-block;
 }
+
+@media (max-width: 768px) {
+  .logo img {
+    position: static;
+  }
+}
+
 
 /* Nav Lists */
 .nav-links,
