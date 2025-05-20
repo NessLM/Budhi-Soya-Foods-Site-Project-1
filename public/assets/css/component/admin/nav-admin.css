@@ -1,0 +1,87 @@
+/* Sidebar */
+.sidebar {
+    background-color: #2e2e2e;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: 100vh;
+    width: 220px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.logo-container:hover {
+    background-color: #e0f7fa;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #07CD74;
+}
+
+.logo-container h3 {
+    font-size: 18px;
+    color: #07CD74;
+}
+
+.section {
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
+
+.section-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.nav-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+/* Setel <a> di dalam <li> sebagai blok yang bisa diklik penuh */
+.nav-list li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ccc;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-list li a:hover {
+    background-color: rgba(7, 205, 116, 0.1);
+    color: #07CD74;
+}
+
+.nav-list li a i {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: #07CD74;
+}

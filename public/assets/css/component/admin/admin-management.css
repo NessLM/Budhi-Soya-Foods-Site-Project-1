@@ -1,0 +1,110 @@
+.admin-manage-container {
+    padding: 20px;
+    background: #f6f9f7;
+    color: #274c24;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 80vh;
+}
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+h2 {
+    margin: 0;
+    color: #3a7d44;
+}
+.btn {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.btn-green {
+    background-color: #3a7d44;
+    color: white;
+}
+.btn-green:hover {
+    background-color: #2f6633;
+}
+.btn-gray {
+    background-color: #d1d5d1;
+    color: #274c24;
+}
+.btn-gray:hover {
+    background-color: #b4b9b4;
+}
+.btn-red {
+    background-color: #c9302c;
+    color: white;
+}
+.btn-red:hover {
+    background-color: #a52825;
+}
+.btn-disabled {
+    color: #6d6d6d;
+    font-style: italic;
+    user-select: none;
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #d6e6d1;
+    text-align: left;
+}
+.admin-table th {
+    background-color: #3a7d44;
+    color: white;
+    font-weight: 600;
+}
+.status-active {
+    color: #3a7d44;
+    font-weight: 700;
+}
+.status-inactive {
+    color: #a1a1a1;
+    font-style: italic;
+}
+.form-section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+}
+.form-group, .form-group-inline {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.form-group label, .form-group-inline label {
+    min-width: 90px;
+    font-weight: 600;
+    color: #274c24;
+}
+input[type="text"], input[type="password"] {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1.5px solid #a1cca1;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #274c24;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #3a7d44;
+    outline: none;
+}
+.d-none {
+    display: none !important;
+}

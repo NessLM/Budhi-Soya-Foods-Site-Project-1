@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Login Admin - BudhiSoyaFoods</title>
     <link rel="stylesheet" href="assets/css/login_admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="admin-login-container">
@@ -14,11 +15,17 @@
             <form method="POST" action="{{ route('login.admin') }}">
                 @csrf
 
-                <label for="username">Username Admin</label>
-                <input type="text" id="username" name="username" required>
+                <div class="input-icon">
+                    <label for="username">Username Admin</label>
+                    <i class="fas fa-user-shield"></i>
+                    <input type="text" id="username" name="username" required>
+                </div>
 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <div class="input-icon">
+                    <label for="password">Password</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" required>
+                </div>
 
                 @if(session('error'))
                     <p class="error-message">{{ session('error') }}</p>

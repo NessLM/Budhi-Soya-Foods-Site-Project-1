@@ -7,6 +7,7 @@
 </head>
 <body>
     <div class="form-container">
+        <a href="/" class="back-button" title="Kembali ke halaman utama">←  Kembali ke Halaman Utama</a>
         <h2>Daftar di BudhiSoyaFoods</h2>
         <p class="description">Selamat datang, pengguna baru! Buat akunmu sekarang</p>
 

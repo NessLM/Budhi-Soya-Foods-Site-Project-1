@@ -24,7 +24,7 @@
         <li><a href="/aboutus">Tentang Kami</a></li>
     
         @auth
-            <li><a href="#">{{ Auth::user()->username }}</a></li>
+            <li><a href="#">{{ strtoupper(Auth::user()->username) }}</a></li>
         @endauth
     </ul>
     

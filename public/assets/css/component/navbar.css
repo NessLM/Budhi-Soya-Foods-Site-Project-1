@@ -34,6 +34,7 @@
 
 @media (max-width: 768px) {
   .logo img {
+    top: 0px; 
     position: static;
   }
 }
@@ -105,8 +106,9 @@
   border-radius: 4px;
   overflow: hidden;
   opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-15px);
+  transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-origin: top center;
 }
 
 .dropdown:hover .dropdown-content {
@@ -114,6 +116,7 @@
   opacity: 1;
   transform: translateY(0);
 }
+
 
 .dropdown-content a {
   padding: 10px;
@@ -211,6 +214,7 @@
   border-radius: 6px;
   z-index: 1000;
   animation: dropdownFadeDown 0.3s ease forwards;
+  transform-origin: top right;
 }
 
 .profile-dropdown:hover .dropdown-content {
@@ -220,13 +224,14 @@
 @keyframes dropdownFadeDown {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 
 /* Form inside dropdown */
 .form-dropdown form {
@@ -318,6 +323,7 @@
     opacity: 1;
     background-color: #3a4a59;
     box-shadow: none;
+    transition: none; /* nonaktifkan supaya langsung muncul */
   }
 
   .dropdown:hover .dropdown-content,

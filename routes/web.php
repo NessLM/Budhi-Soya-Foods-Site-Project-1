@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RoleManagementController;
 
 Route::get('/', function () {
     return view('home');
@@ -59,4 +61,17 @@ Route::middleware(['auth:admin', 'is_admin'])->group(function () {
     })->name('admin.dashboard');
 });
 
+
+// Admin Dashboard
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+});
+
+
+Route::prefix('role/manage-admin')->middleware('auth:admin')->group(function () {
+    Route::get('/', [RoleManagementController::class, 'index'])->name('role.manageadmin.index');
+    Route::post('/', [RoleManagementController::class, 'store'])->name('role.manageadmin.store');
+    Route::put('/{admin}', [RoleManagementController::class, 'update'])->name('role.manageadmin.update');
+    Route::delete('/{admin}', [RoleManagementController::class, 'destroy'])->name('role.manageadmin.destroy');
+});
 

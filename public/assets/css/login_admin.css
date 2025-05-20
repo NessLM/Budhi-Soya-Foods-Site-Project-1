@@ -7,80 +7,129 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f4f4;
+    background: linear-gradient(to right, #d4edda, #c3e6cb);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .admin-login-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    animation: slideUp 0.7s ease-out;
 }
 
 .admin-login-box {
-    background-color: #fff;
-    border: 2px solid #198754;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.08);
-    width: 350px;
+    background-color: #ffffff;
+    border-left: 6px solid #198754;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    width: 380px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.admin-login-box:hover {
+    transform: translateY(-3px);
 }
 
 .admin-login-box h2 {
     color: #198754;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-align: center;
+    font-size: 26px;
+    font-weight: 700;
 }
 
 .admin-login-box .desc {
     font-size: 14px;
     text-align: center;
-    margin-bottom: 20px;
-    color: #555;
+    margin-bottom: 25px;
+    color: #666;
 }
 
+/* Label dengan ikon */
 .admin-login-box label {
     display: block;
-    margin-top: 10px;
+    margin-top: 16px;
     font-weight: 600;
+    color: #333;
+}
+
+.admin-login-box .input-icon {
+    position: relative;
+}
+
+.admin-login-box .input-icon i {
+    position: absolute;
+    top: 70%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
 }
 
 .admin-login-box input {
     width: 100%;
-    padding: 10px;
-    margin-top: 6px;
+    padding: 10px 10px 10px 35px;
+    margin-top: 8px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: all 0.25s ease;
+    background-color: #fdfdfd;
 }
 
 .admin-login-box input:focus {
     border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
 }
 
+/* Button */
 button {
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100%;
     padding: 12px;
     background-color: #198754;
     color: white;
     font-weight: bold;
+    font-size: 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 button:hover {
     background-color: #157347;
+    transform: scale(1.02);
 }
 
+/* Error Message */
 .error-message {
-    margin-top: 10px;
-    color: red;
+    margin-top: 12px;
+    color: #e74c3c;
     font-size: 14px;
+    text-align: center;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

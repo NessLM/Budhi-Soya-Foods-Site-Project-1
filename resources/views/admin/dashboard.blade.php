@@ -4,61 +4,80 @@
     <meta charset="UTF-8">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="/assets/css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
+    <x-asidebar_admin></x-asidebar_admin>
     <div class="dashboard-container">
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo-container">
-                <img src="/assets/img/logoforadmin.png" alt="Logo BSF" class="logo">
-                <h3>BSF</h3>
-            </div>
-
-            <div class="section">
-                <p class="section-title">Role</p>
-                <ul class="nav-list">
-                    <li>Admin</li>
-                    <li>Pelanggan</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <p class="section-title">Manajemen Produk</p>
-                <ul class="nav-list">
-                    <li>Daftar Produk</li>
-                    <li>Tambah Produk</li>
-                    <li>Kategori</li>
-                </ul>
-            </div>
-
-            <div class="section">
-                <p class="section-title">Pengaturan Sistem</p>
-                <ul class="nav-list">
-                    <li>Pengguna</li>
-                    <li>Log Aktivitas</li>
-                    <li>Backup Data</li>
-                </ul>
-            </div>
-        </aside>
-
+        
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="topbar">
-                <div class="welcome">
-                    <h2>Welcome, {{ $admin->username }}</h2>
-                    <p>Dashboard Admin</p>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="logout-btn">Logout</button>
-                </form>
-            </header>
+<main class="main-content">
+    <header class="topbar">
+        <div class="welcome">
+            <h2><i class="fas fa-user-shield"></i> Welcome, {{ $admin->username }}</h2>
+            <p>Dashboard Admin</p>
+        </div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </form>
+    </header>
 
-            <section class="content-area">
-                <!-- Konten utama dashboard bisa kamu isi di sini -->
-            </section>
-        </main>
+    <section class="content-area">
+        <div class="stat-grid">
+            <div class="stat-card">
+                <i class="fas fa-user-cog stat-icon"></i>
+                <h3>Jumlah Admin</h3>
+                <p>{{ $adminCount }}</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users stat-icon"></i>
+                <h3>Jumlah Pengguna</h3>
+                <p>{{ $userCount }}</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-box-open stat-icon"></i>
+                <h3>Jumlah Produk</h3>
+                <p>{{ $productCount }}</p>
+            </div>
+        </div>
+
+        <!-- Pendapatan dan Riwayat -->
+        <div class="pendapatan-riwayat-grid">
+            <div class="pendapatan-card">
+                <i class="fas fa-coins pendapatan-icon"></i>
+                <h3>Pendapatan Bulanan</h3>
+                <p>Rp 0,-</p>
+            </div>
+            <div class="pendapatan-card">
+                <i class="fas fa-wallet pendapatan-icon"></i>
+                <h3>Pendapatan Tahunan</h3>
+                <p>Rp 0,-</p>
+            </div>
+            <div class="riwayat-card">
+                <h3><i class="fas fa-history"></i> Riwayat Login Admin</h3>
+                <ul>
+                    @foreach($riwayat as $log)
+                    <li><i class="fas fa-user"></i> {{ $log->username }} - {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <!-- Grafik Placeholder -->
+        <div class="grafik-container">
+            <div class="grafik-card" id="grafik-penjualan">
+                <h3><i class="fas fa-chart-line"></i> Grafik Penjualan Bulanan</h3>
+                <!-- Chart.js nanti di sini -->
+            </div>
+            <div class="grafik-card" id="grafik-pengguna">
+                <h3><i class="fas fa-chart-pie"></i> Grafik Pertumbuhan Pengguna</h3>
+                <!-- Chart.js nanti di sini -->
+            </div>
+        </div>
+    </section>
+</main>
+
 
     </div>
 </body>

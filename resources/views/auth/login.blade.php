@@ -5,11 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - BudhiSoyaFoods</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
+    <link rel="stylesheet" href="/assets/css/auth.css">
 </head>
 
 <body>
     <div class="form-container">
+        <a href="/" class="back-button" title="Kembali ke halaman utama">←  Kembali ke Halaman Utama</a>
         <h2 class="form-title">Login di <span class="brand">BudhiSoyaFoods</span></h2>
         <p class="description">Selamat datang kembali, pengguna setia!</p>
 
