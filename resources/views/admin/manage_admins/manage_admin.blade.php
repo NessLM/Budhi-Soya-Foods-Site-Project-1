@@ -32,7 +32,7 @@
                 <!-- Form Tambah Admin -->
                 <section id="addAdminSection" class="form-section d-none">
                     <h3>Tambah Admin Baru</h3>
-                    <form method="POST" action="{{ route('role.manageadmin.store') }}">
+                    <form method="POST" action="{{ route('rolemanagementadmin.store') }}">
                         @csrf
                         <div class="form-group">
                             <label>Username</label>
@@ -65,30 +65,29 @@
                                 <td>{{ $admin->username }}</td>
                                 <td>
                                     @if($admin->id === auth('admin')->user()->id)
-                                        <span class="status-active">Sedang Aktif</span>
+                                        <span class="status-active">Active Right Now</span>
                                     @else
                                         <span class="status-inactive">Tidak Aktif</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if($admin->id === auth('admin')->user()->id)
+                                        <span class="btn-disabled">Active Right Now</span>
+                                    @else
                                         <button class="btn btn-edit btn-green" data-id="{{ $admin->id }}">Edit</button>
-                                        <form method="POST" action="{{ route('role.manageadmin.destroy', $admin->id) }}" class="delete-form d-inline" onsubmit="return confirm('Yakin ingin menghapus admin ini?')">
+                                        <form method="POST" action="{{ route('rolemanagementadmin.destroy', $admin->id) }}" class="delete-form d-inline" onsubmit="return confirm('Yakin ingin menghapus admin ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-delete btn-red">Hapus</button>
                                         </form>
-                                    @else
-                                        <span class="btn-disabled">Sedang Aktif</span>
                                     @endif
                                 </td>
                             </tr>
 
                             <!-- Form Edit -->
-                            @if($admin->id !== auth('admin')->user()->id)
                             <tr class="edit-form-row d-none" id="editFormRow-{{ $admin->id }}">
                                 <td colspan="4">
-                                    <form method="POST" action="{{ route('role.manageadmin.update', $admin->id) }}">
+                                    <form method="POST" action="{{ route('rolemanagementadmin.update', $admin->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group-inline">
@@ -102,7 +101,6 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -20,12 +20,10 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+    
 
     public function username()
     {

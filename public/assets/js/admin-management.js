@@ -1,60 +1,64 @@
-document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
+document.addEventListener("DOMContentLoaded", function () {
+    const btnAddAdmin = document.getElementById("btnAddAdmin");
+    const addAdminSection = document.getElementById("addAdminSection");
+    const btnCancelAdd = document.getElementById("btnCancelAdd");
+    const allEditForms = document.querySelectorAll(".edit-form-row");
 
-    const btnAddAdmin = document.getElementById('btnAddAdmin');
-    const addAdminSection = document.getElementById('addAdminSection');
-    const btnCancelAdd = document.getElementById('btnCancelAdd');
-    const editButtons = document.querySelectorAll('.btn-edit');
-    const cancelEditButtons = document.querySelectorAll('.btn-cancel-edit');
-    let openEditId = null;
+    // Cek elemen penting ada dulu
+    if (btnAddAdmin && addAdminSection && btnCancelAdd) {
+        // Tampilkan/tutup form tambah admin
+        btnAddAdmin.addEventListener("click", function () {
+            closeAllEditForms(); // Tutup form edit lain dulu
+            addAdminSection.classList.toggle("d-none");
 
-    btnAddAdmin.addEventListener('click', () => {
-        if (addAdminSection.classList.contains('d-none')) {
-            addAdminSection.classList.remove('d-none');
-            addAdminSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            addAdminSection.classList.add('d-none');
-        }
-
-        if(openEditId) {
-            document.getElementById('editFormRow-' + openEditId).classList.add('d-none');
-            openEditId = null;
-        }
-    });
-
-    btnCancelAdd.addEventListener('click', () => {
-        addAdminSection.classList.add('d-none');
-    });
-
-    editButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-
-            if(!addAdminSection.classList.contains('d-none')) {
-                addAdminSection.classList.add('d-none');
-            }
-
-            if(openEditId && openEditId !== id) {
-                document.getElementById('editFormRow-' + openEditId).classList.add('d-none');
-            }
-
-            const editFormRow = document.getElementById('editFormRow-' + id);
-            if(editFormRow.classList.contains('d-none')) {
-                editFormRow.classList.remove('d-none');
-                editFormRow.scrollIntoView({ behavior: 'smooth' });
-                openEditId = id;
-            } else {
-                editFormRow.classList.add('d-none');
-                openEditId = null;
+            // Fokus ke input username jika form ditampilkan
+            if (!addAdminSection.classList.contains("d-none")) {
+                const input = addAdminSection.querySelector("input[name='username']");
+                if (input) input.focus();
             }
         });
-    });
 
-    cancelEditButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            document.getElementById('editFormRow-' + id).classList.add('d-none');
-            openEditId = null;
+        btnCancelAdd.addEventListener("click", function () {
+            addAdminSection.classList.add("d-none");
         });
-    });
+
+        // Tombol Edit
+        document.querySelectorAll(".btn-edit").forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                const targetForm = document.getElementById(`editFormRow-${id}`);
+
+                // Tutup form tambah jika sedang terbuka
+                addAdminSection.classList.add("d-none");
+
+                // Toggle edit form: jika sudah terbuka, tutup. Kalau belum, tutup semua lalu buka
+                if (targetForm && !targetForm.classList.contains("d-none")) {
+                    targetForm.classList.add("d-none");
+                } else {
+                    closeAllEditForms();
+                    if (targetForm) {
+                        targetForm.classList.remove("d-none");
+
+                        // Fokus otomatis ke input username di form edit
+                        const input = targetForm.querySelector("input[name='username']");
+                        if (input) input.focus();
+                    }
+                }
+            });
+        });
+
+        // Tombol Batal Edit
+        document.querySelectorAll(".btn-cancel-edit").forEach(button => {
+            button.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                const form = document.getElementById(`editFormRow-${id}`);
+                if (form) form.classList.add("d-none");
+            });
+        });
+
+        // Fungsi untuk menutup semua form edit
+        function closeAllEditForms() {
+            allEditForms.forEach(form => form.classList.add("d-none"));
+        }
+    }
 });

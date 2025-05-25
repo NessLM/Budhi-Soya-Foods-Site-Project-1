@@ -12,7 +12,7 @@
         <p class="section-title">Role</p>
         <ul class="nav-list">
             <li>
-                <a href="{{ route('role.manageadmin.index') }}">
+                <a href="{{ route('rolemanagementadmin.index') }}">
                     <i data-lucide="shield-check"></i> Admin
                 </a>
             </li>

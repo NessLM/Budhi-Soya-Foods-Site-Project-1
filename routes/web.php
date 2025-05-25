@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\RoleManagementController;
+use App\Http\Controllers\RoleManagementAdminController;
 
 Route::get('/', function () {
     return view('home');
@@ -67,11 +67,10 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
 
-
-Route::prefix('role/manage-admin')->middleware('auth:admin')->group(function () {
-    Route::get('/', [RoleManagementController::class, 'index'])->name('role.manageadmin.index');
-    Route::post('/', [RoleManagementController::class, 'store'])->name('role.manageadmin.store');
-    Route::put('/{admin}', [RoleManagementController::class, 'update'])->name('role.manageadmin.update');
-    Route::delete('/{admin}', [RoleManagementController::class, 'destroy'])->name('role.manageadmin.destroy');
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/role-management', [RoleManagementAdminController::class, 'index'])->name('rolemanagementadmin.index');
+    Route::post('/admin/role-management', [RoleManagementAdminController::class, 'store'])->name('rolemanagementadmin.store');
+    Route::put('/admin/role-management/{id}', [RoleManagementAdminController::class, 'update'])->name('rolemanagementadmin.update');
+    Route::delete('/admin/role-management/{id}', [RoleManagementAdminController::class, 'destroy'])->name('rolemanagementadmin.destroy');
 });
 
