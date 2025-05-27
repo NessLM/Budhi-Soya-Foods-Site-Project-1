@@ -1,0 +1,40 @@
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3a7d44;
+    padding: 15px 25px;
+    border-radius: 0 0 10px 10px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.topbar .welcome h2 {
+    margin: 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.topbar .welcome p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #e0f3df;
+}
+
+.logout-btn {
+    background-color: #c9302c;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #a52825;
+}

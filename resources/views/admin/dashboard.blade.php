@@ -7,21 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-    <x-asidebar_admin></x-asidebar_admin>
+    <x-admin.asidebar_admin></x-admin.asidebar_admin>
     <div class="dashboard-container">
         
         <!-- Main Content -->
 <main class="main-content">
-    <header class="topbar">
-        <div class="welcome">
-            <h2><i class="fas fa-user-shield"></i> Welcome, {{ $admin->username }}</h2>
-            <p>Dashboard Admin</p>
-        </div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-        </form>
-    </header>
+    <x-admin.atopbar_admin title="Dashboard Admin" icon="fas fa-user-shield" />
+
 
     <section class="content-area">
         <div class="stat-grid">

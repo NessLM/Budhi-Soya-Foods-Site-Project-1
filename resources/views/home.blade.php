@@ -25,27 +25,51 @@
   <section class="body-section">
     <div class="main-product">
       <h2>Produk Utama Kami</h2>
-      <div class="main-product-container">
-        
-        {{-- <div class="product-card">
+      <div class="main-product-slider">
+        <div class="product-card active">
           <div class="product-image">
-            <img src="produk.jpg" alt="Produk Utama">
+            <img src="https://via.placeholder.com/400x300" alt="Susu Kedelai Original">
           </div>
           <div class="product-info">
-            <h3>Judul Produk</h3>
-            <p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum..</p>
+            <h3>Susu Kedelai Original</h3>
+            <p class="desc">Susu kedelai murni tanpa tambahan gula, cocok untuk semua kalangan.</p>
             <div class="stock-price">
-              <span>Stok: 25</span>
-              <span>Harga: Rp 50.000,00</span>
+              <span>Stok: 50</span>
+              <span>Harga: Rp10.000</span>
             </div>
             <button class="btn-detail">Detail Produk</button>
-          </div> --}}
+          </div>
         </div>
-        
+
+        <div class="product-card active">
+          <div class="product-image">
+            <img src="https://via.placeholder.com/400x300" alt="Susu Kedelai Original">
+          </div>
+          <div class="product-info">
+            <h3>Susu Kedelai Original</h3>
+            <p class="desc">Susu kedelai murni tanpa tambahan gula, cocok untuk semua kalangan.</p>
+            <div class="stock-price">
+              <span>Stok: 50</span>
+              <span>Harga: Rp10.000</span>
+            </div>
+            <button class="btn-detail">Detail Produk</button>
+          </div>
+        </div>
+        <!-- Tambahkan lebih banyak .product-card sesuai kebutuhan -->
+      </div>
+      <div class="slider-controls">
+        <button class="prev">&#10094;</button>
+        <div class="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="next">&#10095;</button>
       </div>
     </div>
   </section>
 
+  <script src="/assets/js/home.js"></script>
 
 </body>
 
