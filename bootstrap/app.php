@@ -13,8 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'is_admin' => \App\Http\Middleware\IsAdmin::class,
+            'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,  // <-- ini baru
         ]);
     })    
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+    
+    

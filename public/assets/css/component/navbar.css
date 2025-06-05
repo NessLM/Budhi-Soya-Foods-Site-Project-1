@@ -1,5 +1,24 @@
 /* ========== BASIC STYLES ========== */
+/* ========== MENU TOGGLE ========== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: transform 0.3s ease;
+}
 
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ========== FIXED NAVBAR STYLES ========== */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -8,41 +27,42 @@
   padding: 10px 20px;
   font-family: 'Lato', sans-serif;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  min-height: 70px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Scrolled state - smaller and with shadow */
+.navbar.scrolled {
+  padding: 8px 20px;
+  min-height: 60px;
+  background-color: rgba(38, 71, 42, 0.95);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar.scrolled .logo img {
+  height: 45px;
+}
+
+/* Body padding to compensate for fixed navbar */
+body {
+  padding-top: 70px;
+  transition: padding-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.navbar-scrolled {
+  padding-top: 60px;
 }
 
 /* Logo */
-.logo a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo img {
-  position: absolute;
-  top: 0px; 
-  right: auto;
-  left: auto;
-  height: 100px;
-  display: none;
-}
-
-.logo img[src] {
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-  .logo img {
-    top: 0px; 
-    position: static;
-  }
-}
-
-
-/* Nav Lists */
-.nav-links,
-.loginul {
+.logoul {
   display: flex;
   align-items: center;
   list-style: none;
@@ -50,34 +70,71 @@
   padding: 0;
 }
 
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  position: static;
+  height: 60px;
+  width: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo img:not([src]),
+.logo img[src=""] {
+  display: none;
+}
+
+/* Nav Lists */
+.nav-links,
+.btnaccount {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 5px;
+}
+
 .nav-links li,
-.loginul li {
+.btnaccount li {
   position: relative;
 }
 
 /* Links Styling */
 .nav-links a,
-.loginul a {
+.btnaccount a {
   position: relative;
   overflow: hidden;
   color: white;
   text-decoration: none;
-  padding: 10px 25px;
+  padding: 12px 20px;
   display: block;
   z-index: 1;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Scrolled state adjustments for links */
+.navbar.scrolled .nav-links a,
+.navbar.scrolled .btnaccount a {
+  padding: 10px 18px;
 }
 
 /* Underline on nav-links only */
 .nav-links a {
   text-decoration: underline;
   text-decoration-color: white;
-  text-underline-offset: 10px;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
 }
 
 /* Background hover effect */
 .nav-links a::before,
-.loginul a::before {
+.btnaccount a::before {
   content: "";
   position: absolute;
   top: -100%;
@@ -90,7 +147,7 @@
 }
 
 .nav-links a:hover::before,
-.loginul a:hover::before {
+.btnaccount a:hover::before {
   top: 0;
 }
 
@@ -98,17 +155,21 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #2d3748;
-  min-width: 160px;
+  background-color: rgba(45, 55, 72, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-width: 180px;
   top: 100%;
   left: 0;
   z-index: 10;
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
   opacity: 0;
   transform: translateY(-15px);
   transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-origin: top center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dropdown:hover .dropdown-content {
@@ -117,31 +178,39 @@
   transform: translateY(0);
 }
 
-
 .dropdown-content a {
-  padding: 10px;
+  padding: 12px 16px;
   color: white;
   text-decoration: none;
   display: block;
   transition: background-color 0.3s ease;
+  border: none;
 }
 
 .dropdown-content a:hover {
-  background-color: #4a5568;
+  background-color: rgba(74, 85, 104, 0.8);
 }
 
 /* Buttons - Login and Register */
 .login-btn a,
 .register-btn a {
   position: relative;
-  border-radius: 20px;
+  border-radius: 25px;
   font-weight: 600;
   display: inline-block;
-  padding: 5px 25px;
+  padding: 8px 24px;
   overflow: hidden;
   z-index: 1;
   text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+/* Scrolled state adjustments for buttons */
+.navbar.scrolled .login-btn a,
+.navbar.scrolled .register-btn a {
+  padding: 6px 20px;
+  font-size: 13px;
 }
 
 /* Login button specifics */
@@ -169,6 +238,7 @@
 
 .login-btn a:hover {
   color: white;
+  transform: translateY(-2px);
 }
 
 /* Register button specifics */
@@ -192,6 +262,7 @@
 
 .register-btn a:hover {
   color: black;
+  transform: translateY(-2px);
 }
 
 .register-btn a:hover::before {
@@ -207,18 +278,37 @@
   display: none;
   position: absolute;
   right: 0;
-  background-color: #fff;
-  min-width: 250px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-width: 200px;
   padding: 15px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-radius: 8px;
   z-index: 1000;
   animation: dropdownFadeDown 0.3s ease forwards;
   transform-origin: top right;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .profile-dropdown:hover .dropdown-content {
   display: block;
+}
+
+.profile-dropdown .dropdown-content a {
+  color: #333;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+}
+
+.profile-dropdown .dropdown-content a:last-of-type {
+  border-bottom: none;
+}
+
+.profile-dropdown .dropdown-content a:hover {
+  background-color: rgba(248, 249, 250, 0.8);
+  color: #26472A;
 }
 
 @keyframes dropdownFadeDown {
@@ -231,7 +321,6 @@
     transform: translateY(0);
   }
 }
-
 
 /* Form inside dropdown */
 .form-dropdown form {
@@ -271,7 +360,7 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .update-btn {
@@ -281,6 +370,7 @@
 
 .update-btn:hover {
   background-color: #2c6cca;
+  transform: translateY(-1px);
 }
 
 .logout-btn {
@@ -290,44 +380,255 @@
 
 .logout-btn:hover {
   background-color: #b02a36;
+  transform: translateY(-1px);
 }
 
 /* ========== RESPONSIVE NAVBAR ========== */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  body {
+    padding-top: 80px;
+  }
+
+  body.navbar-scrolled {
+    padding-top: 70px;
+  }
+
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 15px;
+    padding: 15px 20px;
+    position: fixed;
+    min-height: 80px;
   }
 
-  .logoul,
+  .navbar.scrolled {
+    min-height: 70px;
+    padding: 12px 20px;
+  }
+
+  .logoul {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
   .nav-links,
-  .loginul {
+  .btnaccount {
+    display: none;
     flex-direction: column;
     width: 100%;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: stretch;
+    gap: 0;
+    background-color: rgba(38, 71, 42, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: slideDown 0.3s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar.active .nav-links,
+  .navbar.active .btnaccount {
+    display: flex;
+  }
+
+  .nav-links li,
+  .btnaccount li {
+    width: 100%;
   }
 
   .nav-links a,
-  .loginul a,
-  .profile-icon {
+  .btnaccount a {
     width: 100%;
-    padding: 10px;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: left;
   }
 
-  .dropdown-content,
-  .profile-dropdown .dropdown-content {
+  .nav-links li:last-child a,
+  .btnaccount li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Mobile dropdown adjustments */
+  .dropdown-content {
     position: static;
+    display: none;
     transform: none;
     opacity: 1;
-    background-color: #3a4a59;
+    background-color: rgba(26, 58, 29, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: none;
-    transition: none; /* nonaktifkan supaya langsung muncul */
+    border-radius: 0;
+    margin-left: 20px;
+    border-left: 3px solid #F8C993;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .dropdown:hover .dropdown-content,
-  .profile-dropdown:hover .dropdown-content {
+  .dropdown.active .dropdown-content {
     display: block;
   }
+
+  .dropdown-content a {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  /* Mobile profile dropdown */
+  .profile-dropdown .dropdown-content {
+    position: static;
+    background-color: rgba(26, 58, 29, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: none;
+    border-radius: 0;
+    margin-left: 20px;
+    border-left: 3px solid #F8C993;
+    animation: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-dropdown .dropdown-content a {
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .profile-dropdown .dropdown-content a:hover {
+    background-color: rgba(45, 55, 72, 0.8);
+    color: white;
+  }
+
+  /* Mobile button adjustments */
+  .login-btn,
+  .register-btn {
+    width: 100%;
+  }
+
+  .login-btn a,
+  .register-btn a {
+    width: 100%;
+    margin: 0;
+    border-radius: 6px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .register-btn a {
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+  /* Animation for mobile menu */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ========== TABLET ADJUSTMENTS ========== */
+@media (max-width: 992px) and (min-width: 769px) {
+  body {
+    padding-top: 75px;
+  }
+
+  body.navbar-scrolled {
+    padding-top: 65px;
+  }
+
+  .navbar {
+    padding: 12px 15px;
+    min-height: 75px;
+  }
+
+  .navbar.scrolled {
+    min-height: 65px;
+  }
+  
+  .nav-links a,
+  .btnaccount a {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .navbar.scrolled .nav-links a,
+  .navbar.scrolled .btnaccount a {
+    padding: 8px 13px;
+  }
+  
+  .login-btn a,
+  .register-btn a {
+    padding: 6px 18px;
+    font-size: 13px;
+  }
+
+  .navbar.scrolled .login-btn a,
+  .navbar.scrolled .register-btn a {
+    padding: 5px 15px;
+    font-size: 12px;
+  }
+}
+
+/* ========== SMALL MOBILE ADJUSTMENTS ========== */
+@media (max-width: 480px) {
+  body {
+    padding-top: 75px;
+  }
+
+  body.navbar-scrolled {
+    padding-top: 65px;
+  }
+
+  .navbar {
+    padding: 10px 15px;
+    min-height: 75px;
+  }
+
+  .navbar.scrolled {
+    min-height: 65px;
+    padding: 8px 15px;
+  }
+  
+  .menu-toggle {
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+
+  .navbar.scrolled .logo img {
+    height: 40px;
+  }
+  
+  .nav-links a,
+  .btnaccount a {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+/* ========== SMOOTH SCROLL BEHAVIOR ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar during transitions */
+body.navbar-transitioning {
+  overflow-x: hidden;
 }

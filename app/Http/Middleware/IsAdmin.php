@@ -13,7 +13,7 @@ class IsAdmin
     {
         // Hanya cek apakah guard 'admin' terautentikasi
         if (!Auth::guard('admin')->check()) {
-            abort(403, 'Unauthorized');
+            abort(403, 'You do not have sufficient privileges.');
         }
 
         return $next($request);

@@ -7,10 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RoleManagementAdminController;
+use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [ProductController::class, 'home'])->name('home');
 
 Route::get('/product', function () {
     return view('product');
@@ -54,9 +53,9 @@ Route::get('/admin-login-secret-1903', [AuthAdminController::class, 'showLoginAd
 // Ini penting untuk proses login!
 Route::post('/admin-login-secret-1903', [AuthAdminController::class, 'loginAdmin'])->name('login.admin.post');
 
-Route::middleware(['auth:admin', 'is_admin'])->group(function () {
+Route::middleware(['auth:admin', 'is_admin', 'prevent-back-history'])->group(function () {
     Route::get('/admin-login-secret-1903/dashboard', function (Request $request) {
-        $admin = Auth::guard('admin')->user();
+        $admin = Auth::guard(name: 'admin')->user();
         return view('admin.dashboard', compact('admin'));
     })->name('admin.dashboard');
 });
@@ -67,10 +66,23 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
 
+// Route Management
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/role-management', [RoleManagementAdminController::class, 'index'])->name('rolemanagementadmin.index');
     Route::post('/admin/role-management', [RoleManagementAdminController::class, 'store'])->name('rolemanagementadmin.store');
     Route::put('/admin/role-management/{id}', [RoleManagementAdminController::class, 'update'])->name('rolemanagementadmin.update');
     Route::delete('/admin/role-management/{id}', [RoleManagementAdminController::class, 'destroy'])->name('rolemanagementadmin.destroy');
 });
+
+Route::middleware(['auth:admin'])->group(function(){
+    Route::get('/admin/tambahproduk', [ProductController::class, 'add_index'])->name('addproduct.index');
+    Route::post('/admin/tambahproduk', [ProductController::class, 'store'])->name('addproduct.store');
+
+    Route::get('/admin/daftarproduk', [ProductController::class, 'list_index'])->name('listproduct.index');
+
+    Route::get('/admin/produk/{id_produk}/edit', [ProductController::class, 'edit'])->name('product.edit');  // <-- route edit GET
+    Route::put('/admin/produk/{id_produk}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/admin/produk/{id_produk}', [ProductController::class, 'destroy'])->name('product.destroy');
+});
+
 

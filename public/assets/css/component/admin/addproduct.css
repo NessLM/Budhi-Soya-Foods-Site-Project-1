@@ -1,0 +1,158 @@
+/* addproduct.css */
+
+/* Basic form container */
+.form-tambah-produk {
+    margin-top: 1.5rem;
+    max-width: 600px;
+    background: #fefefe;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #34495e;
+  }
+  
+  /* Form groups spacing */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Labels */
+  .form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    color: #2c3e50;
+  }
+  
+  /* Required star */
+  .required-star {
+    color: #e74c3c;
+    margin-left: 4px;
+  }
+  
+  /* Inputs and textareas */
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+    color: #2c3e50;
+    box-sizing: border-box;
+  }
+  
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: #2a9d8f;
+    outline: none;
+    background-color: #f9fdfa;
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+  }
+  
+  /* Error messages */
+  .error-message {
+    margin-top: 6px;
+    color: #e74c3c;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  /* Button */
+  .btn-primary {
+    background-color: #2a9d8f;
+    border: none;
+    color: white;
+    padding: 0.65rem 1.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    box-shadow: 0 6px 10px rgb(42 157 143 / 0.3);
+  }
+  
+  .btn-primary:hover {
+    background-color: #1f7b6b;
+  }
+  
+  /* Category groups container */
+  .category-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Category labels */
+  .category-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.4rem;
+    display: block;
+    font-size: 1.05rem;
+  }
+
+  /* Foto Preview */
+  #foto-preview {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    margin-top: 12px;
+}
+#foto-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-secondary {
+  background-color: #f3f4f6; /* abu muda lembut */
+  color: #34495e; /* warna teks gelap tapi kalem */
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 2px 6px rgb(52 73 94 / 0.15);
+  text-decoration: none; /* karena tombol ini link di kode kamu */
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #e2e8f0; /* abu muda sedikit lebih gelap */
+  border-color: #2a9d8f; /* warna aksen hijau toska */
+  color: #1f2937;
+  box-shadow: 0 4px 12px rgb(42 157 143 / 0.3);
+  outline: none;
+}
+
+
+  
+  /* Responsive tweaks */
+  @media (max-width: 640px) {
+    .form-tambah-produk {
+      padding: 1.5rem 1.8rem;
+      max-width: 100%;
+    }
+  
+    .radio-group,
+    .checkbox-group {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+  

@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Manajemen Admin</title>
     <link rel="stylesheet" href="/assets/css/admin-dashboard.css" />
     <link rel="stylesheet" href="/assets/css/component/admin/admin-management.css" />

@@ -1,5 +1,8 @@
 <!-- resources/views/layouts/navbar.blade.php -->
 <nav class="navbar">
+    <!-- Toggle Button (Mobile only) -->
+    <button class="menu-toggle" onclick="document.querySelector('.navbar').classList.toggle('active')">&#9776;</button>
+
     <!-- Logo -->
     <ul class="logoul">
         <li class="logo">
@@ -9,7 +12,7 @@
         </li>
     </ul>
 
-
+    <!-- Nav links -->
     <ul class="nav-links">
         <li><a href="/">Beranda</a></li>
         <li class="dropdown">
@@ -22,14 +25,14 @@
         </li>
         <li><a href="/contact">Kontak Kami</a></li>
         <li><a href="/aboutus">Tentang Kami</a></li>
-    
+
         @auth
             <li><a href="#">{{ strtoupper(Auth::user()->username) }}</a></li>
         @endauth
     </ul>
-    
 
-    <ul class="loginul">
+    <!-- Login / Profile -->
+    <ul class="btnaccount">
         @auth
             <li class="profile-dropdown">
                 <a href="#" class="profile-icon">👤</a>
@@ -47,9 +50,7 @@
             <li class="register-btn"><a href="/register">Daftar</a></li>
         @endauth
     </ul>
-    
-    
-
 </nav>
 
 <link rel="stylesheet" href="/assets/css/component/navbar.css">
+<script src="/assets/js/navbar.js"></script>
