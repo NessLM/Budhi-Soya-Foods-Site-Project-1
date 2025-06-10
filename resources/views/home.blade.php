@@ -7,7 +7,8 @@
   <title>Budhi Soya Foods</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}" />
+  <link rel="stylesheet" href="/assets/css/home.css" />
+  <script src="/assets/js/home.js"></script>
 </head>
 
 <body class="font-sans bg-white">
@@ -59,7 +60,9 @@
                 <button class="btn-detail">Detail Produk</button>
               </a>
             @else
+            <a href="/product">
               <button class="btn-detail" id="btnDetailProduk">Detail Produk</button>
+            </a>
             @endauth
 
             <div class="dots-navigation">
@@ -247,7 +250,6 @@
     // Pass products data to JavaScript
     const products = @json($products);
   </script>
-  <script src="{{ asset('assets/js/home.js') }}"></script>
 
 </body>
 </html>

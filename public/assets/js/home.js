@@ -148,7 +148,8 @@ document.addEventListener('DOMContentLoaded', function() {
       'pesanProdukBtn',
       'btnDetailProduk', 
       'lihatProdukBtn',
-      'jelajahiBtn'
+      'jelajahiBtn',
+      'produkNav'
   ];
 
   // Show login modal

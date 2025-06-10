@@ -1,110 +1,26 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+  }
+
+/* Reset dasar */
 * {
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.hero-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-.card-hover {
-    transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-}
-
-.contact-form {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.floating-animation {
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-}
-
-.pulse-animation {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-.gradient-text {
-    background: linear-gradient(45deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.contact-icon {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transition: all 0.3s ease;
-}
-
-.contact-icon:hover {
-    transform: rotate(360deg) scale(1.1);
-}
-
-.map-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-.social-icon {
-    transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: translateY(-5px);
-    filter: brightness(1.2);
-}
-
-.form-input {
-    transition: all 0.3s ease;
-}
-
-.form-input:focus {
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-}
-
-.bg-pattern {
-    background-image: radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2px, transparent 0),
-                      radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2px, transparent 0);
-    background-size: 100px 100px;
-}
-
-.glowing-border {
-    position: relative;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-}
-
-.glowing-border::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: -1;
-    margin: -2px;
-    border-radius: inherit;
-    background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
+/* Container utility */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
