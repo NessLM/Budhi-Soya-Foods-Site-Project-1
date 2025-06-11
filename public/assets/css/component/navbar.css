@@ -1,15 +1,17 @@
-/* ========== BASIC STYLES ========== */
+/* ========== NAVBAR SPECIFIC STYLES ========== */
+/* Isolated navbar styles to prevent conflicts with home.css */
 
-body {
+/* Basic navbar body adjustments */
+.navbar-body {
     padding-top: 80px;
 }
 
-body.navbar-scrolled {
+.navbar-body.navbar-scrolled {
     padding-top: 60px;
 }
 
 /* ========== MENU TOGGLE ========== */
-.menu-toggle {
+.navbar .menu-toggle {
     display: none;
     background: none;
     border: none;
@@ -23,7 +25,7 @@ body.navbar-scrolled {
     transition: transform 0.3s ease;
 }
 
-.menu-toggle:hover {
+.navbar .menu-toggle:hover {
     transform: scale(1.1) rotate(90deg);
 }
 
@@ -35,7 +37,6 @@ body.navbar-scrolled {
     align-items: center;
     background-color: #26472a;
     padding: 10px 20px;
-    font-family: "Lato", sans-serif;
     flex-wrap: wrap;
     position: fixed;
     top: 0;
@@ -62,7 +63,7 @@ body.navbar-scrolled {
 }
 
 /* Logo */
-.logoul {
+.navbar .logoul {
     display: flex;
     align-items: center;
     list-style: none;
@@ -70,27 +71,27 @@ body.navbar-scrolled {
     padding: 0;
 }
 
-.logo a {
+.navbar .logo a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
-.logo img {
+.navbar .logo img {
     position: static;
     height: 60px;
     width: auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.logo img:not([src]),
-.logo img[src=""] {
+.navbar .logo img:not([src]),
+.navbar .logo img[src=""] {
     display: none;
 }
 
 /* Nav Lists */
-.nav-links,
-.btnaccount {
+.navbar .nav-links,
+.navbar .btnaccount {
     display: flex;
     align-items: center;
     list-style: none;
@@ -99,14 +100,14 @@ body.navbar-scrolled {
     gap: 5px;
 }
 
-.nav-links li,
-.btnaccount li {
+.navbar .nav-links li,
+.navbar .btnaccount li {
     position: relative;
 }
 
 /* Links Styling - REMOVED UNDERLINES */
-.nav-links a,
-.btnaccount a {
+.navbar .nav-links a,
+.navbar .btnaccount a {
     position: relative;
     overflow: hidden;
     color: white;
@@ -127,7 +128,7 @@ body.navbar-scrolled {
 }
 
 /* Modern Glow Effect on Hover */
-.nav-links a::before {
+.navbar .nav-links a::before {
     content: "";
     position: absolute;
     top: 0;
@@ -144,11 +145,11 @@ body.navbar-scrolled {
     z-index: -1;
 }
 
-.nav-links a:hover::before {
+.navbar .nav-links a:hover::before {
     left: 100%;
 }
 
-.nav-links a:hover {
+.navbar .nav-links a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -156,8 +157,8 @@ body.navbar-scrolled {
 }
 
 /* Buttons - Login and Register */
-.login-btn a,
-.register-btn a {
+.navbar .login-btn a,
+.navbar .register-btn a {
     position: relative;
     border-radius: 25px;
     font-weight: 600;
@@ -178,13 +179,13 @@ body.navbar-scrolled {
 }
 
 /* Login button specifics */
-.login-btn a {
+.navbar .login-btn a {
     background-color: #f8c993;
     color: black;
     border: none;
 }
 
-.login-btn a::before {
+.navbar .login-btn a::before {
     content: "";
     position: absolute;
     top: -100%;
@@ -196,23 +197,23 @@ body.navbar-scrolled {
     transition: top 0.3s ease-in-out;
 }
 
-.login-btn a:hover::before {
+.navbar .login-btn a:hover::before {
     top: 0;
 }
 
-.login-btn a:hover {
+.navbar .login-btn a:hover {
     color: white;
     transform: translateY(-2px);
 }
 
 /* Register button specifics */
-.register-btn a {
+.navbar .register-btn a {
     color: white;
     border: 2px solid white;
     margin-left: 10px;
 }
 
-.register-btn a::before {
+.navbar .register-btn a::before {
     content: "";
     position: absolute;
     top: -100%;
@@ -224,17 +225,17 @@ body.navbar-scrolled {
     transition: top 0.3s ease-in-out;
 }
 
-.register-btn a:hover {
+.navbar .register-btn a:hover {
     color: black;
     transform: translateY(-2px);
 }
 
-.register-btn a:hover::before {
+.navbar .register-btn a:hover::before {
     top: 0;
 }
 
 /* Username link for authenticated users */
-.username-link {
+.navbar .username-link {
     color: white;
     font-weight: 600;
     padding: 12px 20px;
@@ -247,13 +248,13 @@ body.navbar-scrolled {
     overflow: hidden;
 }
 
-.username-link:hover {
+.navbar .username-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.username-link::before {
+.navbar .username-link::before {
     content: "";
     position: absolute;
     top: -100%;
@@ -265,11 +266,11 @@ body.navbar-scrolled {
     transition: top 0.3s ease-in-out;
 }
 
-.username-link:hover::before {
+.navbar .username-link:hover::before {
     top: 0;
 }
 
-.username-link:hover {
+.navbar .username-link:hover {
     color: black;
 }
 
@@ -279,7 +280,7 @@ body.navbar-scrolled {
 }
 
 /* Logout button */
-.logout-btn {
+.navbar .logout-btn {
     background-color: #e63946;
     color: white;
     border: none;
@@ -292,7 +293,7 @@ body.navbar-scrolled {
     margin-left: 10px;
 }
 
-.logout-btn:hover {
+.navbar .logout-btn:hover {
     background-color: #b02a36;
     transform: translateY(-2px);
 }
@@ -304,15 +305,15 @@ body.navbar-scrolled {
 
 /* ========== RESPONSIVE NAVBAR ========== */
 @media (max-width: 768px) {
-    .menu-toggle {
+    .navbar .menu-toggle {
         display: block;
     }
 
-    body {
+    .navbar-body {
         padding-top: 80px;
     }
 
-    body.navbar-scrolled {
+    .navbar-body.navbar-scrolled {
         padding-top: 70px;
     }
 
@@ -329,14 +330,14 @@ body.navbar-scrolled {
         padding: 12px 20px;
     }
 
-    .logoul {
+    .navbar .logoul {
         width: 100%;
         justify-content: center;
         margin-bottom: 10px;
     }
 
-    .nav-links,
-    .btnaccount {
+    .navbar .nav-links,
+    .navbar .btnaccount {
         display: none;
         flex-direction: column;
         width: 100%;
@@ -357,31 +358,31 @@ body.navbar-scrolled {
         display: flex;
     }
 
-    .nav-links li,
-    .btnaccount li {
+    .navbar .nav-links li,
+    .navbar .btnaccount li {
         width: 100%;
         opacity: 0;
         animation: fadeInStagger 0.5s ease-out forwards;
     }
 
-    .nav-links li:nth-child(1) {
+    .navbar .nav-links li:nth-child(1) {
         animation-delay: 0.1s;
     }
-    .nav-links li:nth-child(2) {
+    .navbar .nav-links li:nth-child(2) {
         animation-delay: 0.2s;
     }
-    .nav-links li:nth-child(3) {
+    .navbar .nav-links li:nth-child(3) {
         animation-delay: 0.3s;
     }
-    .nav-links li:nth-child(4) {
+    .navbar .nav-links li:nth-child(4) {
         animation-delay: 0.4s;
     }
-    .nav-links li:nth-child(5) {
+    .navbar .nav-links li:nth-child(5) {
         animation-delay: 0.5s;
     }
 
-    .nav-links a,
-    .btnaccount a {
+    .navbar .nav-links a,
+    .navbar .btnaccount a {
         width: 100%;
         padding: 15px 20px;
         text-align: left;
@@ -390,26 +391,26 @@ body.navbar-scrolled {
         transition: all 0.3s ease;
     }
 
-    .nav-links a:hover,
-    .btnaccount a:hover {
+    .navbar .nav-links a:hover,
+    .navbar .btnaccount a:hover {
         background-color: rgba(255, 255, 255, 0.1);
         padding-left: 30px;
         transform: none;
     }
 
-    .nav-links li:last-child a,
-    .btnaccount li:last-child a {
+    .navbar .nav-links li:last-child a,
+    .navbar .btnaccount li:last-child a {
         border-bottom: none;
     }
 
     /* Mobile button adjustments */
-    .login-btn,
-    .register-btn {
+    .navbar .login-btn,
+    .navbar .register-btn {
         width: 100%;
     }
 
-    .login-btn a,
-    .register-btn a {
+    .navbar .login-btn a,
+    .navbar .register-btn a {
         width: 100%;
         margin: 0;
         border-radius: 6px;
@@ -417,26 +418,26 @@ body.navbar-scrolled {
         justify-content: center;
     }
 
-    .register-btn a {
+    .navbar .register-btn a {
         margin-left: 0;
         margin-top: 5px;
     }
 
     /* Mobile username and logout */
-    .username-link {
+    .navbar .username-link {
         border-radius: 6px;
         text-align: center;
         margin-bottom: 5px;
     }
 
-    .logout-btn {
+    .navbar .logout-btn {
         width: 100%;
         margin: 0;
         border-radius: 6px;
         text-align: center;
     }
 
-    /* NEW IMPROVED ANIMATIONS */
+    /* NAVBAR SPECIFIC ANIMATIONS */
     @keyframes slideInFromTop {
         0% {
             opacity: 0;
@@ -458,51 +459,15 @@ body.navbar-scrolled {
             transform: translateX(0);
         }
     }
-
-    /* Slide from left animation */
-    @keyframes slideFromLeft {
-        0% {
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* Zoom in animation */
-    @keyframes zoomIn {
-        0% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-
-    /* Flip animation */
-    @keyframes flipIn {
-        0% {
-            opacity: 0;
-            transform: rotateY(-90deg);
-        }
-        100% {
-            opacity: 1;
-            transform: rotateY(0deg);
-        }
-    }
 }
 
 /* ========== TABLET ADJUSTMENTS ========== */
 @media (max-width: 992px) and (min-width: 769px) {
-    body {
+    .navbar-body {
         padding-top: 75px;
     }
 
-    body.navbar-scrolled {
+    .navbar-body.navbar-scrolled {
         padding-top: 65px;
     }
 
@@ -515,8 +480,8 @@ body.navbar-scrolled {
         min-height: 65px;
     }
 
-    .nav-links a,
-    .btnaccount a {
+    .navbar .nav-links a,
+    .navbar .btnaccount a {
         padding: 10px 15px;
         font-size: 14px;
     }
@@ -526,8 +491,8 @@ body.navbar-scrolled {
         padding: 8px 13px;
     }
 
-    .login-btn a,
-    .register-btn a {
+    .navbar .login-btn a,
+    .navbar .register-btn a {
         padding: 6px 18px;
         font-size: 13px;
     }
@@ -538,7 +503,7 @@ body.navbar-scrolled {
         font-size: 12px;
     }
 
-    .username-link {
+    .navbar .username-link {
         padding: 6px 18px;
         font-size: 13px;
     }
@@ -548,7 +513,7 @@ body.navbar-scrolled {
         font-size: 12px;
     }
 
-    .logout-btn {
+    .navbar .logout-btn {
         padding: 6px 18px;
         font-size: 13px;
     }
@@ -561,11 +526,11 @@ body.navbar-scrolled {
 
 /* ========== SMALL MOBILE ADJUSTMENTS ========== */
 @media (max-width: 480px) {
-    body {
+    .navbar-body {
         padding-top: 75px;
     }
 
-    body.navbar-scrolled {
+    .navbar-body.navbar-scrolled {
         padding-top: 65px;
     }
 
@@ -579,13 +544,13 @@ body.navbar-scrolled {
         padding: 8px 15px;
     }
 
-    .menu-toggle {
+    .navbar .menu-toggle {
         top: 15px;
         right: 15px;
         font-size: 24px;
     }
 
-    .logo img {
+    .navbar .logo img {
         height: 50px;
     }
 
@@ -593,47 +558,19 @@ body.navbar-scrolled {
         height: 40px;
     }
 
-    .nav-links a,
-    .btnaccount a {
+    .navbar .nav-links a,
+    .navbar .btnaccount a {
         padding: 12px 15px;
         font-size: 14px;
     }
 }
 
-/* ========== SMOOTH SCROLL BEHAVIOR ========== */
+/* ========== NAVBAR SMOOTH SCROLL BEHAVIOR ========== */
 html {
     scroll-behavior: smooth;
 }
 
-/* Hide scrollbar during transitions */
-body.navbar-transitioning {
+/* Hide scrollbar during navbar transitions */
+.navbar-body.navbar-transitioning {
     overflow-x: hidden;
-}
-
-/* Demo content */
-.demo-content {
-    padding: 50px 20px;
-    text-align: center;
-    color: white;
-}
-
-.demo-content h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.demo-content p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto 30px;
-}
-
-.demo-section {
-    padding: 100px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 20px 0;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
 }

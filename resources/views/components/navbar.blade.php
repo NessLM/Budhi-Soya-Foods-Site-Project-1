@@ -1,13 +1,13 @@
 <!-- resources/views/components/navbar.blade.php -->
 <nav class="navbar">
     <!-- Toggle Button (Mobile only) -->
-    <button class="menu-toggle" onclick="document.querySelector('.navbar').classList.toggle('active')">&#9776;</button>
+    <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">&#9776;</button>
 
     <!-- Logo -->
     <ul class="logoul">
         <li class="logo">
-            <a href="/">
-                <img src="/assets/img/logo.png" alt="Logo" class="logo-img" />
+            <a href="/" aria-label="Budhi Soya Foods - Home">
+                <img src="/assets/img/logo.png" alt="Budhi Soya Foods Logo" class="logo-img" />
             </a>
         </li>
     </ul>
@@ -17,7 +17,7 @@
         <li><a href="/">Beranda</a></li>
         <li>
             @auth
-            <a href="/product'">Produk</a>
+            <a href="/product">Produk</a>
             @else
             <a href="/product" id="produkNav">Produk</a>
             @endauth

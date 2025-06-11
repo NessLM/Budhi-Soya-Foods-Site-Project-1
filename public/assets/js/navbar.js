@@ -23,9 +23,23 @@ document.addEventListener('click', function(event) {
     const navbar = document.querySelector('.navbar');
     const menuToggle = document.querySelector('.menu-toggle');
     
-    if (!navbar.contains(event.target) && !menuToggle.contains(event.target)) {
+    if (navbar && menuToggle && !navbar.contains(event.target) && !menuToggle.contains(event.target)) {
         navbar.classList.remove('active');
     }
+});
+
+// Close mobile menu when clicking on nav links
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.navbar .nav-links a, .navbar .btnaccount a');
+    const navbar = document.querySelector('.navbar');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (navbar) {
+                navbar.classList.remove('active');
+            }
+        });
+    });
 });
 
 // Smooth scroll for anchor links
@@ -40,4 +54,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+// Add navbar-body class to body for proper spacing
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('navbar-body');
 });
