@@ -34,9 +34,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.user');
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-
-
 // Daftar
 
 // Tampilkan form register
@@ -45,6 +42,10 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 // Proses form register
 Route::post('/register', [AuthController::class, 'register'])->name('register.user');
 
+// Email Verification Routes
+Route::get('/verify-email', [AuthController::class, 'showVerifyEmail'])->name('verify.email.form');
+Route::post('/verify-email', [AuthController::class, 'verifyEmail'])->name('verify.email');
+Route::post('/resend-otp', [AuthController::class, 'resendOTP'])->name('resend.otp');
 
 // Secret Admin
 
@@ -84,5 +85,3 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::put('/admin/produk/{id_produk}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/admin/produk/{id_produk}', [ProductController::class, 'destroy'])->name('product.destroy');
 });
-
-

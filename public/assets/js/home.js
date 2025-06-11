@@ -52,9 +52,30 @@ document.addEventListener('DOMContentLoaded', function() {
           if (productDetails) {
               const harga = new Intl.NumberFormat('id-ID').format(product.harga);
               productDetails.innerHTML = `
-                  <span>Harga: Rp${harga}</span>
-                  <span>Stok: ${product.jumlah_produk}</span>
+                  <div class="detail-item">
+                      <i class="fas fa-tag"></i>
+                      <span>Rp${harga}</span>
+                  </div>
+                  <div class="detail-item">
+                      <i class="fas fa-boxes"></i>
+                      <span>Stok: ${product.jumlah_produk}</span>
+                  </div>
               `;
+          }
+          
+          // Update badge with category
+          const productBadge = document.querySelector('.product-badge');
+          if (productBadge) {
+              productBadge.innerHTML = `
+                  <i class="fas fa-leaf"></i>
+                  ${product.kategori}
+              `;
+          }
+
+          // Update category display
+          const productCategory = document.querySelector('.product-category');
+          if (productCategory) {
+              productCategory.textContent = product.kategori;
           }
           
           // Update dots

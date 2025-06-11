@@ -43,7 +43,7 @@
   <section class="body-section">
     <div class="container">
       <h2 class="section-title">
-        Produk Unggulan Kami
+        Kami Menyediakan
         <span class="title-underline"></span>
       </h2>
 
@@ -62,8 +62,8 @@
                      alt="{{ $products->first()->nama_produk }}"
                      loading="lazy">
                 <div class="product-badge">
-                  <i class="fas fa-star"></i>
-                  Unggulan
+                  <i class="fas fa-leaf"></i>
+                  {{ $products->first()->kategori }}
                 </div>
               </div>
             </div>
