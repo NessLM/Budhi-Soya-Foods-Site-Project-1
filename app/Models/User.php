@@ -20,6 +20,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'email_verified_at',
+        'is_email_verified',
     ];
     
 
@@ -43,6 +45,26 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_email_verified' => 'boolean',
         ];
+    }
+
+    /**
+     * Check if user's email is verified
+     */
+    public function hasVerifiedEmail()
+    {
+        return $this->is_email_verified && $this->email_verified_at !== null;
+    }
+
+    /**
+     * Mark email as verified
+     */
+    public function markEmailAsVerified()
+    {
+        $this->update([
+            'email_verified_at' => now(),
+            'is_email_verified' => true,
+        ]);
     }
 }
