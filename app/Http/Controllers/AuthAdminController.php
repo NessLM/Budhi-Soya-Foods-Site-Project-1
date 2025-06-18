@@ -20,10 +20,15 @@ class AuthAdminController extends Controller
 
     public function loginAdmin(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
+        ], [
+            'username.required' => 'Username harus diisi.',
+            'password.required' => 'Password harus diisi.',
         ]);
+
+        $credentials = $request->only('username', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate(); // untuk menghindari session fixation attack
@@ -39,7 +44,7 @@ class AuthAdminController extends Controller
                 ->with('success', 'Selamat datang kembali, ' . Auth::guard('admin')->user()->username);
         }
 
-        return back()->withInput()->withErrors([
+        return back()->withInput($request->only('username'))->withErrors([
             'username' => 'Username atau password salah.',
         ]);
     }

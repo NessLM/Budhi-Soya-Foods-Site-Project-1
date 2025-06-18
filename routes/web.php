@@ -24,12 +24,18 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.user');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+
+
+// Daftar
+
+// Tampilkan form register
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.user');
 
-// =====================================
-// Auth Admin (RAHASIA)
-// =====================================
+
+// Secret Admin
+
 Route::get('/admin-login-secret-1903', [AuthAdminController::class, 'showLoginAdmin'])->name('login.admin');
 Route::post('/admin-login-secret-1903', [AuthAdminController::class, 'loginAdmin'])->name('login.admin.post');
 
@@ -56,4 +62,5 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
     Route::put('/admin/produk/{id_produk}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/admin/produk/{id_produk}', [ProductController::class, 'destroy'])->name('product.destroy');
 });
+
 
