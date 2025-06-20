@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -13,16 +12,30 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
-        'id_produk',
-        'jumlah',
-        'harga_satuan',
+        'product_id',
+        'quantity',
+        'product_options',
+        'notes',
+        'added_at',
     ];
 
     protected $casts = [
-        'harga_satuan' => 'decimal:2',
+        'product_options' => 'array',
+        'added_at' => 'datetime',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
     // Relationships
+    /*
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -32,6 +45,7 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class, 'id_produk', 'id_produk');
     }
+    */
 
     // Computed attributes
     public function getTotalHargaAttribute()

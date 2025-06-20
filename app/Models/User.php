@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email_verified_at',
         'is_email_verified',
     ];
-    
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,26 +45,39 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'is_email_verified' => 'boolean',
+            'birth_date' => 'date',
+            'preferences' => 'array',
+            'last_login_at' => 'datetime',
         ];
     }
 
-    /**
-     * Check if user's email is verified
-     */
-    public function hasVerifiedEmail()
+    public function cart()
     {
-        return $this->is_email_verified && $this->email_verified_at !== null;
+        return $this->hasMany(Cart::class);
     }
 
-    /**
-     * Mark email as verified
-     */
-    public function markEmailAsVerified()
+    public function orders()
     {
-        $this->update([
-            'email_verified_at' => now(),
-            'is_email_verified' => true,
-        ]);
+        return $this->hasMany(Order::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function defaultAddress()
+    {
+        return $this->hasOne(UserAddress::class)->where('is_default', true);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 }
