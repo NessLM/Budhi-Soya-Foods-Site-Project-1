@@ -24,6 +24,12 @@
         </li>
         <li><a href="/contact">Kontak Kami</a></li>
         <li><a href="/aboutus">Tentang Kami</a></li>
+        @auth
+            <li><a href="{{ route('cart.index') }}" class="nav-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-counter" id="cartCounter" style="display: none;">0</span>
+            </a></li>
+        @endauth
 
         @auth
             <li><a href="/profile" class="username-link">

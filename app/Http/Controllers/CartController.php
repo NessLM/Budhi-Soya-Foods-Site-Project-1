@@ -1,0 +1,159 @@
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Cart;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+
+class CartController extends Controller
+{
+    public function index()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu');
+        }
+
+        $cartItems = Cart::with('product')
+            ->where('user_id', Auth::id())
+            ->get();
+
+        $total = $cartItems->sum(function($item) {
+            return $item->jumlah * $item->harga_satuan;
+        });
+
+        return view('cart.index', compact('cartItems', 'total'));
+    }
+
+    public function add(Request $request)
+    {
+        if (!Auth::check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Silakan login terlebih dahulu'
+            ], 401);
+        }
+
+        $request->validate([
+            'product_id' => 'required|exists:produk,id_produk',
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        $product = Product::findOrFail($request->product_id);
+
+        if ($product->jumlah_produk < $request->quantity) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Stok produk tidak mencukupi'
+            ]);
+        }
+
+        $existingCart = Cart::where('user_id', Auth::id())
+            ->where('id_produk', $request->product_id)
+            ->first();
+
+        if ($existingCart) {
+            $existingCart->jumlah += $request->quantity;
+            $existingCart->save();
+        } else {
+            Cart::create([
+                'user_id' => Auth::id(),
+                'id_produk' => $request->product_id,
+                'jumlah' => $request->quantity,
+                'harga_satuan' => $product->harga
+            ]);
+        }
+
+        $cartCount = Cart::where('user_id', Auth::id())->sum('jumlah');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Produk berhasil ditambahkan ke keranjang',
+            'cart_count' => $cartCount
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        $cartItem = Cart::where('id_cart', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        $product = Product::findOrFail($cartItem->id_produk);
+
+        if ($product->jumlah_produk < $request->quantity) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Stok produk tidak mencukupi'
+            ]);
+        }
+
+        $cartItem->jumlah = $request->quantity;
+        $cartItem->save();
+
+        $total = Cart::where('user_id', Auth::id())
+            ->with('product')
+            ->get()
+            ->sum(function($item) {
+                return $item->jumlah * $item->harga_satuan;
+            });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Keranjang berhasil diperbarui',
+            'total' => number_format($total, 0, ',', '.'),
+            'item_total' => number_format($cartItem->jumlah * $cartItem->harga_satuan, 0, ',', '.')
+        ]);
+    }
+
+    public function remove($id)
+    {
+        $cartItem = Cart::where('id_cart', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        $cartItem->delete();
+
+        $cartCount = Cart::where('user_id', Auth::id())->sum('jumlah');
+        
+        $total = Cart::where('user_id', Auth::id())
+            ->with('product')
+            ->get()
+            ->sum(function($item) {
+                return $item->jumlah * $item->harga_satuan;
+            });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Produk berhasil dihapus dari keranjang',
+            'cart_count' => $cartCount,
+            'total' => number_format($total, 0, ',', '.')
+        ]);
+    }
+
+    public function clear()
+    {
+        Cart::where('user_id', Auth::id())->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Keranjang berhasil dikosongkan'
+        ]);
+    }
+
+    public function getCount()
+    {
+        if (!Auth::check()) {
+            return response()->json(['count' => 0]);
+        }
+
+        $count = Cart::where('user_id', Auth::id())->sum('jumlah');
+        return response()->json(['count' => $count]);
+    }
+}
