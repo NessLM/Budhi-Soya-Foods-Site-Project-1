@@ -40,7 +40,7 @@ class AuthAdminController extends Controller
                 'created_at' => now(),
             ]);
 
-            return redirect()->intended(route('admin.manage_admins.dashboard'))
+            return redirect()->intended(route('admin.dashboard'))
                 ->with('success', 'Selamat datang kembali, ' . Auth::guard('admin')->user()->username);
         }
 
