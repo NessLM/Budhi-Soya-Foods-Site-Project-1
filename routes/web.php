@@ -13,7 +13,7 @@ use App\Http\Controllers\ProductController;
 // Public (user)
 // =====================================
 Route::get('/', [ProductController::class, 'home'])->name('home');
-Route::get('/product', fn () => view('product'));
+Route::get('/product', [ProductController::class, 'index'])->name('product.index');
 Route::get('/contact', fn () => view('contact'));
 Route::get('/aboutus', fn () => view('aboutus'));
 
@@ -62,5 +62,8 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
     Route::put('/admin/produk/{id_produk}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/admin/produk/{id_produk}', [ProductController::class, 'destroy'])->name('product.destroy');
 });
+
+// API Routes for AJAX calls
+Route::get('/api/product/{id_produk}', [ProductController::class, 'show'])->name('product.api.show');
 
 

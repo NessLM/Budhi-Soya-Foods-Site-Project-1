@@ -57,6 +57,29 @@ class ProductController extends Controller
     return view('admin.listproduct', compact('products'));
 }
 
+    public function index()
+    {
+        $products = Product::where('jumlah_produk', '>', 0)->get();
+        return view('product', compact('products'));
+    }
+
+    public function show($id_produk)
+    {
+        $product = Product::where('id_produk', $id_produk)->first();
+        
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Produk tidak ditemukan'
+            ], 404);
+        }
+        
+        return response()->json([
+            'success' => true,
+            'product' => $product
+        ]);
+    }
+
 public function edit($id_produk)
 {
     $product = Product::findOrFail($id_produk);

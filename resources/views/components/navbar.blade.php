@@ -26,7 +26,10 @@
         <li><a href="/aboutus">Tentang Kami</a></li>
 
         @auth
-            <li><a href="/profile" class="username-link">{{ strtoupper(Auth::user()->username) }}</a></li>
+            <li><a href="/profile" class="username-link">
+                <i class="fas fa-user"></i>
+                {{ strtoupper(Auth::user()->username) }}
+            </a></li>
         @endauth
     </ul>
 
