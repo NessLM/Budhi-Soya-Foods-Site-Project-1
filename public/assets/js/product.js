@@ -568,4 +568,4 @@ function updateCartCount() {
 }
 
 // Check if user is authenticated (set this from Laravel)
-window.authUser = @auth true @else false @endauth;
+

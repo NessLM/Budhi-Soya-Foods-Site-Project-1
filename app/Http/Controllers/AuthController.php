@@ -35,12 +35,6 @@ class AuthController extends Controller
         if (Auth::attempt($loginData)) {
             $user = Auth::user();
             
-            // Check if email is verified
-            if (!$user->hasVerifiedEmail()) {
-                Auth::logout();
-                return back()->with('error', 'Email Anda belum diverifikasi. Silakan verifikasi email terlebih dahulu.')->withInput();
-            }
-            
             $request->session()->regenerate(); // cegah session fixation
             return redirect()->intended('/')->with('success', 'Selamat datang kembali, ' . $user->username . '!');
         }
