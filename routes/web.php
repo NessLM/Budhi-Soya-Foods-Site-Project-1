@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RoleManagementAdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 
 // =====================================
 // Public (user)
@@ -66,4 +71,44 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
 // API Routes for AJAX calls
 Route::get('/api/product/{id_produk}', [ProductController::class, 'show'])->name('product.api.show');
 
+// Cart routes
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::get('/cart/count', [CartController::class, 'getCount'])->name('cart.count');
+});
 
+// Checkout routes
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+});
+
+// Order routes
+Route::middleware('auth')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/{id}/success', [OrderController::class, 'success'])->name('order.success');
+    Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('/orders/{id}/confirm-payment', [OrderController::class, 'confirmPayment'])->name('orders.confirmPayment');
+});
+
+// Profile routes
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::post('/profile/add-address', [ProfileController::class, 'addAddress'])->name('profile.addAddress');
+    Route::delete('/profile/delete-address/{id}', [ProfileController::class, 'deleteAddress'])->name('profile.deleteAddress');
+});
+
+// Wishlist routes
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist.add');
+    Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+});

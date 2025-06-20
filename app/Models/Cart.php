@@ -31,25 +31,12 @@ class Cart extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'id_produk');
     }
-
-    // Relationships
-    /*
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'id_produk', 'id_produk');
-    }
-    */
 
     // Computed attributes
     public function getTotalHargaAttribute()
     {
-        return $this->jumlah * $this->harga_satuan;
+        return $this->quantity * $this->product->harga;
     }
 }

@@ -21,7 +21,7 @@ class CartController extends Controller
             ->get();
 
         $total = $cartItems->sum(function($item) {
-            return $item->jumlah * $item->harga_satuan;
+            return $item->quantity * $item->product->harga;
         });
 
         return view('cart.index', compact('cartItems', 'total'));
@@ -43,7 +43,7 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        if ($product->jumlah_produk < $request->quantity) {
+        if ($product->stok < $request->quantity) {
             return response()->json([
                 'success' => false,
                 'message' => 'Stok produk tidak mencukupi'
@@ -51,22 +51,22 @@ class CartController extends Controller
         }
 
         $existingCart = Cart::where('user_id', Auth::id())
-            ->where('id_produk', $request->product_id)
+            ->where('product_id', $request->product_id)
             ->first();
 
         if ($existingCart) {
-            $existingCart->jumlah += $request->quantity;
+            $existingCart->quantity += $request->quantity;
             $existingCart->save();
         } else {
             Cart::create([
                 'user_id' => Auth::id(),
-                'id_produk' => $request->product_id,
-                'jumlah' => $request->quantity,
-                'harga_satuan' => $product->harga
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'added_at' => now()
             ]);
         }
 
-        $cartCount = Cart::where('user_id', Auth::id())->sum('jumlah');
+        $cartCount = Cart::where('user_id', Auth::id())->sum('quantity');
 
         return response()->json([
             'success' => true,
@@ -85,30 +85,30 @@ class CartController extends Controller
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
-        $product = Product::findOrFail($cartItem->id_produk);
+        $product = Product::findOrFail($cartItem->product_id);
 
-        if ($product->jumlah_produk < $request->quantity) {
+        if ($product->stok < $request->quantity) {
             return response()->json([
                 'success' => false,
                 'message' => 'Stok produk tidak mencukupi'
             ]);
         }
 
-        $cartItem->jumlah = $request->quantity;
+        $cartItem->quantity = $request->quantity;
         $cartItem->save();
 
         $total = Cart::where('user_id', Auth::id())
             ->with('product')
             ->get()
             ->sum(function($item) {
-                return $item->jumlah * $item->harga_satuan;
+                return $item->quantity * $item->product->harga;
             });
 
         return response()->json([
             'success' => true,
             'message' => 'Keranjang berhasil diperbarui',
             'total' => number_format($total, 0, ',', '.'),
-            'item_total' => number_format($cartItem->jumlah * $cartItem->harga_satuan, 0, ',', '.')
+            'item_total' => number_format($cartItem->quantity * $cartItem->product->harga, 0, ',', '.')
         ]);
     }
 
@@ -120,13 +120,13 @@ class CartController extends Controller
 
         $cartItem->delete();
 
-        $cartCount = Cart::where('user_id', Auth::id())->sum('jumlah');
+        $cartCount = Cart::where('user_id', Auth::id())->sum('quantity');
         
         $total = Cart::where('user_id', Auth::id())
             ->with('product')
             ->get()
             ->sum(function($item) {
-                return $item->jumlah * $item->harga_satuan;
+                return $item->quantity * $item->product->harga;
             });
 
         return response()->json([
@@ -153,7 +153,7 @@ class CartController extends Controller
             return response()->json(['count' => 0]);
         }
 
-        $count = Cart::where('user_id', Auth::id())->sum('jumlah');
+        $count = Cart::where('user_id', Auth::id())->sum('quantity');
         return response()->json(['count' => $count]);
     }
 }
