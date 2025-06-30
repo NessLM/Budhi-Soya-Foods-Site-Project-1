@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -14,16 +13,12 @@ return new class extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id('id_cart');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('id_produk');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_produk')->constrained('produk', 'id_produk')->onDelete('cascade');
             $table->integer('jumlah');
             $table->decimal('harga_satuan', 10, 2);
             $table->timestamps();
 
-            // Foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_produk')->references('id_produk')->on('produk')->onDelete('cascade');
-            
             // Unique constraint to prevent duplicate cart items
             $table->unique(['user_id', 'id_produk']);
         });

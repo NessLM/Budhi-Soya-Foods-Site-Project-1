@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +14,7 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('produk')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('produk', 'id_produk')->onDelete('cascade');
             $table->string('product_name');
             $table->decimal('product_price', 10, 2);
             $table->integer('quantity');

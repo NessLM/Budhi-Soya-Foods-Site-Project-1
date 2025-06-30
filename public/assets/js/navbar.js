@@ -60,3 +60,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('navbar-body');
 });
+
+// Login Modals

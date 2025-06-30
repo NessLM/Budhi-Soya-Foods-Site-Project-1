@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cart', function (Blueprint $table) {
-            $table->json('product_options')->nullable()->after('quantity'); // For storing product variants/options
+            $table->json('product_options')->nullable()->after('jumlah'); // For storing product variants/options
             $table->text('notes')->nullable()->after('product_options');
             $table->timestamp('added_at')->nullable()->after('notes');
             

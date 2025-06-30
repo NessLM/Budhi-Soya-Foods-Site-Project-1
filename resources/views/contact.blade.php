@@ -382,7 +382,10 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Budhi Soya Foods. Semua hak dilindungi undang-undang.</p>
+                <p>
+                    &copy; 2024 Budhi Soya Foods. Semua hak dilindungi undang-undang.<br>
+                    <span style="font-size: 0.95em; color: #888;">Made by Raihan Adi Pratama</span>
+                </p>
             </div>
         </div>
     </footer>

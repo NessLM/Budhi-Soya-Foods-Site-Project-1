@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,7 +155,7 @@
                         </div>
                     </div>
                     <div class="member-info">
-                        <h3>Budi Santoso</h3>
+                        <h3>Anonymous</h3>
                         <p class="member-role">Founder & CEO</p>
                         <p class="member-desc">Memimpin visi perusahaan dengan pengalaman 20+ tahun di industri makanan sehat.</p>
                     </div>
@@ -173,7 +172,7 @@
                         </div>
                     </div>
                     <div class="member-info">
-                        <h3>Sari Dewi</h3>
+                        <h3>Anonymous</h3>
                         <p class="member-role">Production Manager</p>
                         <p class="member-desc">Mengawasi seluruh proses produksi untuk memastikan kualitas produk terbaik.</p>
                     </div>
@@ -190,7 +189,7 @@
                         </div>
                     </div>
                     <div class="member-info">
-                        <h3>Ahmad Risky</h3>
+                        <h3>Anonymous</h3>
                         <p class="member-role">Quality Control Manager</p>
                         <p class="member-desc">Menjamin setiap produk memenuhi standar kualitas dan keamanan pangan.</p>
                     </div>
@@ -313,9 +312,15 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Budhi Soya Foods. Semua hak dilindungi undang-undang.</p>
+                <p>
+                    &copy; 2024 Budhi Soya Foods. Semua hak dilindungi undang-undang.<br>
+                    <span style="font-size: 0.95em; color: #888;">Made by Raihan Adi Pratama</span>
+                </p>
             </div>
         </div>
     </footer>
+
+
+    
 </body>
 </html>

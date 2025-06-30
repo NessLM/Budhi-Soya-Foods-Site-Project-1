@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +14,7 @@ return new class extends Migration
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('produk')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('produk', 'id_produk')->onDelete('cascade');
             $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null');
             $table->integer('rating')->unsigned(); // 1-5 stars
             $table->text('review')->nullable();

@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -12,19 +11,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu');
-        }
-
-        $cartItems = Cart::with('product')
-            ->where('user_id', Auth::id())
-            ->get();
-
-        $total = $cartItems->sum(function($item) {
-            return $item->quantity * $item->product->harga;
-        });
-
-        return view('cart.index', compact('cartItems', 'total'));
+        $user = Auth::user();
+        $cartItems = $user->cart()->with('product')->get();
+        return view('cart.index', compact('cartItems'));
     }
 
     public function add(Request $request)

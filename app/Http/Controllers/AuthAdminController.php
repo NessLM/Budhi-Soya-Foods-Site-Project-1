@@ -10,53 +10,36 @@ class AuthAdminController extends Controller
 {
     public function showLoginAdmin()
     {
-        // Kalau udah login, langsung lempar ke dashboard
-        if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
-        }
-
         return view('auth.login_admin');
     }
 
     public function loginAdmin(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ], [
-            'username.required' => 'Username harus diisi.',
-            'password.required' => 'Password harus diisi.',
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
-        $credentials = $request->only('username', 'password');
-
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate(); // untuk menghindari session fixation attack
-
-            // Catat login ke log
-            DB::table('login_logs')->insert([
-                'username' => $request->username,
-                'role' => 'admin',
-                'created_at' => now(),
-            ]);
-
-            return redirect()->intended(route('admin.dashboard'))
-                ->with('success', 'Selamat datang kembali, ' . Auth::guard('admin')->user()->username);
+        // Cek login admin
+        if (Auth::guard('admin')->attempt([
+            'username' => $request->username,
+            'password' => $request->password
+        ])) {
+            // Sukses login, redirect ke dashboard admin
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard')->with('success', 'Login admin berhasil!');
         }
 
-        return back()->withInput($request->only('username'))->withErrors([
-            'username' => 'Username atau password salah.',
-        ]);
+        // Gagal login
+        return back()->with('error', 'Username atau password admin salah.');
     }
 
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
-
-        $request->session()->invalidate(); // hapus semua session
-        $request->session()->regenerateToken(); // amankan CSRF token baru
-
-        return redirect()->route('login.admin')->with('success', 'Anda telah logout dengan aman.');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.admin')->with('success', 'Anda telah logout sebagai admin.');
     }
 
     

@@ -11,11 +11,12 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $orders = $user->orders()->with('orderItems.product')->get();
         $addresses = UserAddress::where('user_id', $user->id)
             ->orderBy('is_default', 'desc')
             ->get();
 
-        return view('profile.index', compact('user', 'addresses'));
+        return view('profile.index', compact('user', 'orders', 'addresses'));
     }
 
     public function update(Request $request)
