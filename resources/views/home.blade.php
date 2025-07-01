@@ -363,29 +363,6 @@
     </div>
   </footer>
 
-  <!-- Login Modal -->
-  <div id="loginModal" class="login-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-    <div class="modal-content">
-      <button class="close-modal" aria-label="Close modal">&times;</button>
-      <h3 id="modal-title">Login Diperlukan</h3>
-      <p>Anda harus login terlebih dahulu untuk mengakses fitur ini.</p>
-      <div class="modal-buttons">
-        <a href="/login" class="modal-login-btn">
-          <i class="fas fa-sign-in-alt"></i>
-          Login
-        </a>
-        <a href="/register" class="modal-register-btn">
-          <i class="fas fa-user-plus"></i>
-          Daftar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Pass products data to JavaScript
-    const products = @json($products);
-  </script>
 
 </body>
 

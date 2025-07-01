@@ -19,7 +19,7 @@
     </div>
 
     @if(auth('admin')->check())
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="logout-btn">
                 <i class="fas fa-sign-out-alt"></i> Logout

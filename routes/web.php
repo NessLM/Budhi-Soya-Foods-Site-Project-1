@@ -82,10 +82,12 @@ Route::middleware('auth')->group(function () {
 // Protected Admin Routes
 // =====================================
 Route::middleware(['auth:admin', 'is_admin', 'prevent-back-history'])->group(function () {
+    
+    // Admin Logout - harus di dalam middleware admin
+    Route::post('/admin/logout', [AuthAdminController::class, 'logout'])->name('admin.logout');
 
-// Dashboard
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
+    // Dashboard
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     // Role management
     Route::get('/admin/role-management', [RoleManagementAdminController::class, 'index'])->name('rolemanagementadmin.index');

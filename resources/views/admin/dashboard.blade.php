@@ -52,9 +52,11 @@
             <div class="riwayat-card">
                 <h3><i class="fas fa-history"></i> Riwayat Login Admin</h3>
                 <ul>
-                    @foreach($riwayat as $log)
-                    <li><i class="fas fa-user"></i> {{ $log->username }} - {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}</li>
-                    @endforeach
+                    @forelse($riwayat as $log)
+                        <li><i class="fas fa-user"></i> {{ $log->username }} - {{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}</li>
+                    @empty
+                        <li><i class="fas fa-info-circle"></i> Belum ada riwayat login</li>
+                    @endforelse
                 </ul>
             </div>
         </div>

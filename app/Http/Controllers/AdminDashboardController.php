@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\LoginLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +17,10 @@ class AdminDashboardController extends Controller
         $adminCount = Admin::count();
         $userCount = User::count();
         $productCount = DB::table('produk')->count();
-        $riwayat = DB::table('login_logs')
-            ->where('role', 'admin')
+        // Ambil riwayat login admin maksimal 4 record terbaru
+        $riwayat = LoginLog::where('role', 'admin')
             ->orderBy('created_at', 'desc')
-            ->limit(5)
+            ->limit(4)
             ->get();
     
         return view('admin.dashboard', compact(

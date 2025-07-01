@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\LoginLog;
 
 class AuthAdminController extends Controller
 {
@@ -25,6 +26,13 @@ class AuthAdminController extends Controller
             'username' => $request->username,
             'password' => $request->password
         ])) {
+            // Catat login log
+            LoginLog::create([
+                'username' => $request->username,
+                'role' => 'admin',
+                'created_at' => now(),
+            ]);
+
             // Sukses login, redirect ke dashboard admin
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard')->with('success', 'Login admin berhasil!');
@@ -39,7 +47,7 @@ class AuthAdminController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login.admin')->with('success', 'Anda telah logout sebagai admin.');
+        return redirect()->route('home')->with('success', 'Anda telah logout sebagai admin.');
     }
 
     
