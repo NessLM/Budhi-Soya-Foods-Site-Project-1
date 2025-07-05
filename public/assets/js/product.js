@@ -415,7 +415,215 @@ function showError(message) {
     `;
 }
 
-// Cart Functions
+// Selection Management
+let selectedProducts = [];
+
+function addToSelection(productId, productName, price, stock, photo) {
+    // Check if product already selected
+    const existingIndex = selectedProducts.findIndex(item => item.id === productId);
+    
+    if (existingIndex !== -1) {
+        // Increase quantity if already selected
+        if (selectedProducts[existingIndex].quantity < stock) {
+            selectedProducts[existingIndex].quantity++;
+            updateSidebar();
+            showNotification('Jumlah produk ditambahkan!', 'success');
+        } else {
+            showNotification('Stok tidak mencukupi!', 'warning');
+        }
+    } else {
+        // Add new product to selection
+        selectedProducts.push({
+            id: productId,
+            name: productName,
+            price: price,
+            stock: stock,
+            photo: photo,
+            quantity: 1
+        });
+        updateSidebar();
+        showNotification('Produk ditambahkan ke pilihan!', 'success');
+    }
+}
+
+function removeFromSelection(productId) {
+    selectedProducts = selectedProducts.filter(item => item.id !== productId);
+    updateSidebar();
+    showNotification('Produk dihapus dari pilihan!', 'info');
+}
+
+function updateQuantity(productId, newQuantity) {
+    const productIndex = selectedProducts.findIndex(item => item.id === productId);
+    if (productIndex !== -1) {
+        const product = selectedProducts[productIndex];
+        if (newQuantity > 0 && newQuantity <= product.stock) {
+            selectedProducts[productIndex].quantity = newQuantity;
+            updateSidebar();
+        } else if (newQuantity > product.stock) {
+            showNotification('Jumlah melebihi stok yang tersedia!', 'warning');
+        }
+    }
+}
+
+function clearSelection() {
+    selectedProducts = [];
+    updateSidebar();
+    showNotification('Semua pilihan dibersihkan!', 'info');
+}
+
+function updateSidebar() {
+    const selectedProductsContainer = document.getElementById('selectedProducts');
+    const orderSummary = document.getElementById('orderSummary');
+    
+    if (selectedProducts.length === 0) {
+        selectedProductsContainer.innerHTML = `
+            <div class="empty-selection">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Belum ada produk dipilih</p>
+            </div>
+        `;
+        orderSummary.style.display = 'none';
+        return;
+    }
+    
+    let html = '';
+    let totalItems = 0;
+    let totalPrice = 0;
+    
+    selectedProducts.forEach(product => {
+        const itemTotal = product.price * product.quantity;
+        totalItems += product.quantity;
+        totalPrice += itemTotal;
+        
+        html += `
+            <div class="selected-item">
+                <div class="selected-item-header">
+                    <div class="selected-item-info">
+                        <h4>${product.name}</h4>
+                        <div class="selected-item-price">Rp ${new Intl.NumberFormat('id-ID').format(product.price)}</div>
+                    </div>
+                    <button class="remove-item-btn" onclick="removeFromSelection(${product.id})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="quantity-control">
+                    <label>Jumlah:</label>
+                    <input type="number" class="quantity-input" value="${product.quantity}"
+                           min="1" max="${product.stock}"
+                           onchange="updateQuantity(${product.id}, parseInt(this.value))">
+                </div>
+                <div class="stock-info">Stok: ${product.stock}</div>
+            </div>
+        `;
+    });
+    
+    selectedProductsContainer.innerHTML = html;
+    
+    // Update summary
+    document.getElementById('totalItems').textContent = totalItems;
+    document.getElementById('totalPrice').textContent = `Rp ${new Intl.NumberFormat('id-ID').format(totalPrice)}`;
+    orderSummary.style.display = 'block';
+}
+
+// Order Form Functions
+function showOrderForm() {
+    if (selectedProducts.length === 0) {
+        showNotification('Pilih produk terlebih dahulu!', 'warning');
+        return;
+    }
+    
+    const modal = document.getElementById('orderFormModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Populate order summary in form
+    updateOrderFormSummary();
+}
+
+function closeOrderForm() {
+    const modal = document.getElementById('orderFormModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function updateOrderFormSummary() {
+    const orderItemsSummary = document.getElementById('orderItemsSummary');
+    const formTotalItems = document.getElementById('formTotalItems');
+    const formTotalPrice = document.getElementById('formTotalPrice');
+    
+    let html = '';
+    let totalItems = 0;
+    let totalPrice = 0;
+    
+    selectedProducts.forEach(product => {
+        const itemTotal = product.price * product.quantity;
+        totalItems += product.quantity;
+        totalPrice += itemTotal;
+        
+        html += `
+            <div class="summary-item-row">
+                <span>${product.name} x${product.quantity}</span>
+                <span>Rp ${new Intl.NumberFormat('id-ID').format(itemTotal)}</span>
+            </div>
+        `;
+    });
+    
+    orderItemsSummary.innerHTML = html;
+    formTotalItems.textContent = totalItems;
+    formTotalPrice.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(totalPrice)}`;
+}
+
+function submitOrder(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const orderData = {
+        nama_pemesan: formData.get('nama_pemesan'),
+        alamat_lengkap: formData.get('alamat_lengkap'),
+        postal_code: formData.get('postal_code'),
+        provinsi: formData.get('provinsi'),
+        products: selectedProducts
+    };
+    
+    // Show loading state
+    const submitBtn = event.target.querySelector('.btn-submit');
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<div class="loading"></div> Memproses...';
+    submitBtn.disabled = true;
+    
+    // Send order to server
+    fetch('/orders/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Pesanan berhasil dibuat!', 'success');
+            closeOrderForm();
+            clearSelection();
+            
+            // Redirect immediately to orders page
+            window.location.href = '/orders';
+        } else {
+            showNotification(data.message || 'Gagal membuat pesanan!', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Terjadi kesalahan saat memproses pesanan!', 'error');
+    })
+    .finally(() => {
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+    });
+}
+
+// Legacy cart function (keep for compatibility)
 function addToCart(productId) {
     // Show loading state
     const button = event.target.closest('button');

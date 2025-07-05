@@ -19,9 +19,9 @@
         <li><a href="{{ route('contact') }}">Kontak Kami</a></li>
         <li><a href="{{ route('aboutus') }}">Tentang Kami</a></li>
         @auth
-            <li><a href="{{ route('cart.index') }}" class="nav-link cart-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-counter" id="cartCounter" style="display: none;">0</span>
+            <li><a href="{{ route('orders.index') }}" class="nav-link orders-link">
+                <i class="fas fa-clipboard-list"></i>
+                Pesanan
             </a></li>
         @endauth
 

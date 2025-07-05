@@ -21,6 +21,7 @@ class Order extends Model
         'total_amount',
         'payment_status',
         'payment_method',
+        'payment_proof',
         'notes',
         'shipping_name',
         'shipping_phone',
