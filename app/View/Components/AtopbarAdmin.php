@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Admin;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class atopbar_admin extends Component
+class AtopbarAdmin extends Component
 {
     public $title;
     public $icon;
@@ -16,7 +16,6 @@ class atopbar_admin extends Component
         $this->title = $title;
         $this->icon = $icon;
     }
-
     public function render()
     {
         return view('components.admin.atopbar-admin');

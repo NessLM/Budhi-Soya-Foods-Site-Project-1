@@ -72,14 +72,6 @@
 <script src="/assets/js/navbar.js"></script>
 
 <script>
-const loginRequiredButtons = [
-    'pesanProdukBtn',
-    'btnDetailProduk', 
-    'lihatProdukBtn',
-    'jelajahiBtn',
-    'produkNav'
-];
-
 document.addEventListener('DOMContentLoaded', function() {
     // Cek apakah user belum login (dengan bantuan blade)
     var isGuest = {{ Auth::check() ? 'false' : 'true' }};
@@ -89,31 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
             produkNav.addEventListener('click', function(e) {
                 e.preventDefault();
                 var loginModal = document.getElementById('loginModal');
-                if(loginModal) loginModal.style.display = 'flex';
+                if(loginModal) {
+                    loginModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                }
             });
         }
     }
-
-    // Close modal
-    var closeModal = document.querySelector('.close-modal');
-    var loginModal = document.getElementById('loginModal');
-    if(closeModal && loginModal) {
-        closeModal.addEventListener('click', function() {
-            loginModal.style.display = 'none';
-        });
-    }
-    // Close modal on outside click
-    if(loginModal) {
-        loginModal.addEventListener('click', function(e) {
-            if(e.target === loginModal) loginModal.style.display = 'none';
-        });
-    }
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && loginModal && loginModal.style.display === 'flex') {
-            loginModal.style.display = 'none';
-        }
-    });
 });
 </script>
 

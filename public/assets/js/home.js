@@ -1,11 +1,11 @@
 // Auto slider functionality
 document.addEventListener('DOMContentLoaded', function() {
-    let currentSlide = 0;
     let slideInterval;
-    const slideDelay = 5000; // 5 seconds
+    const slideDelay = 3000; // 5 seconds
     
-    // Check if products exist
-    if (typeof products === 'undefined' || products.length === 0) {
+    // Check if products exist and have data
+    if (typeof products === 'undefined' || !products || products.length === 0) {
+        console.log('No products available for slider');
         return;
     }
   
@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const dots = document.querySelectorAll('.dot');
     const leftArrow = document.querySelector('.arrow-direction-left');
     const rightArrow = document.querySelector('.arrow-direction-right');
+    
+    // Check if required elements exist
+    if (!productImage || !productTitle || !productDesc || !productDetails) {
+        console.log('Required product elements not found');
+        return;
+    }
   
     // Function to update product display
     function updateProductDisplay(index) {
@@ -113,12 +119,18 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Start auto slider
     function startAutoSlider() {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+        }
         slideInterval = setInterval(nextSlide, slideDelay);
     }
   
     // Stop auto slider
     function stopAutoSlider() {
-        clearInterval(slideInterval);
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
     }
   
     // Restart auto slider
@@ -159,35 +171,28 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Initialize auto slider
     startAutoSlider();
-  
-    // Login modal functionality
+});
+
+// Login modal functionality
+document.addEventListener('DOMContentLoaded', function() {
     const loginModal = document.getElementById('loginModal');
-    const closeModal = document.querySelector('.close-modal');
     
     // Buttons that require login
     const loginRequiredButtons = [
         'pesanProdukBtn',
         'btnDetailProduk', 
         'lihatProdukBtn',
-        'jelajahiBtn',
-        'produkNav',
-        'contactNav',
-        'aboutusNav'
+        'jelajahiBtn'
     ];
   
     // Show login modal
     function showLoginModal() {
         if (loginModal) {
-            loginModal.style.display = 'block';
+            loginModal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-    }
-  
-    // Hide login modal
-    function hideLoginModal() {
-        if (loginModal) {
-            loginModal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore scrolling
+        } else {
+            // Fallback: redirect to login page
+            window.location.href = '/login';
         }
     }
   
@@ -197,40 +202,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (button) {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 showLoginModal();
             });
         }
     });
-  
-    // Close modal event listeners
-    if (closeModal) {
-        closeModal.addEventListener('click', hideLoginModal);
-    }
-  
-    // Close modal when clicking outside
-    if (loginModal) {
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                hideLoginModal();
-            }
-        });
-    }
-  
-    // Handle modal button clicks (no need to prevent default since they're links)
+    
+    // Also handle modal button clicks to restore scrolling
     const modalButtons = document.querySelectorAll('.modal-login-btn, .modal-register-btn');
     modalButtons.forEach(button => {
         button.addEventListener('click', () => {
-            hideLoginModal(); // Hide modal before navigation
+            // Restore scrolling when navigating away
+            document.body.style.overflow = 'auto';
+            // Also hide the modal if it exists
+            if (loginModal) {
+                loginModal.style.display = 'none';
+            }
         });
     });
-  
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && loginModal && loginModal.style.display === 'block') {
-            hideLoginModal();
-        }
-    });
-  
+    
     // Smooth scrolling for anchor links (if any)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -301,9 +291,12 @@ window.addEventListener('resize', function() {
     }
 });
   
+// Global variable for current slide
+let currentSlide = 0;
+
 // Performance optimization: Preload next images
 function preloadNextImage() {
-    if (typeof products !== 'undefined' && products.length > 1) {
+    if (typeof products !== 'undefined' && products && products.length > 1) {
         const nextIndex = (currentSlide + 1) % products.length;
         const nextProduct = products[nextIndex];
         if (nextProduct && nextProduct.foto) {

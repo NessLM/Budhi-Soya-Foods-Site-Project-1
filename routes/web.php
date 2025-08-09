@@ -19,7 +19,10 @@ use App\Models\Product;
 // Public Routes
 // =====================
 Route::get('/', function () {
-    $products = Product::all();
+    $products = Product::where('jumlah_produk', '>', 0)
+        ->inRandomOrder()
+        ->take(3)
+        ->get();
     return view('home', compact('products'));
 })->name('home');
 
@@ -56,8 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::post('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-    Route::get('/orders/{id}/success', [OrderController::class, 'success'])->name('order.success');
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::delete('/orders/{id}/delete', [OrderController::class, 'delete'])->name('orders.delete');
     Route::post('/orders/{id}/confirm-payment', [OrderController::class, 'confirmPayment'])->name('orders.confirmPayment');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

@@ -588,19 +588,53 @@ function submitOrder(event) {
     // Show loading state
     const submitBtn = event.target.querySelector('.btn-submit');
     const originalHTML = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<div class="loading"></div> Memproses...';
+    submitBtn.innerHTML = '<div class="loading-spinner"></div> Memproses...';
     submitBtn.disabled = true;
+    
+    // Show notification that request is being processed
+    showNotification('Memproses pesanan, mohon tunggu...', 'info');
+    
+    // Get CSRF token from meta tag or form
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || 
+                     document.querySelector('input[name="_token"]')?.value;
+    
+    if (!csrfToken) {
+        showNotification('Error: CSRF token tidak ditemukan!', 'error');
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+        return;
+    }
+    
+    // Create AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
     
     // Send order to server
     fetch('/orders/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            'X-CSRF-TOKEN': csrfToken
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify(orderData),
+        signal: controller.signal
     })
-    .then(response => response.json())
+    .then(response => {
+        clearTimeout(timeoutId);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(response => {
+        clearTimeout(timeoutId);
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            });
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             showNotification('Pesanan berhasil dibuat!', 'success');
@@ -614,8 +648,14 @@ function submitOrder(event) {
         }
     })
     .catch(error => {
+        clearTimeout(timeoutId);
         console.error('Error:', error);
-        showNotification('Terjadi kesalahan saat memproses pesanan!', 'error');
+        
+        if (error.name === 'AbortError') {
+            showNotification('Request timeout! Silakan coba lagi.', 'error');
+        } else {
+            showNotification(error.message || 'Terjadi kesalahan saat memproses pesanan!', 'error');
+        }
     })
     .finally(() => {
         submitBtn.innerHTML = originalHTML;

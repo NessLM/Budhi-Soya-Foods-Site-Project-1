@@ -19,7 +19,7 @@
     <x-admin.asidebar_admin></x-admin.asidebar_admin>
 
     <div class="dashboard-container">
-    <x-admin.atopbar_admin 
+    <x-admin.atopbar-admin 
         title="{{ isset($product) ? 'Edit Produk' : 'Tambah Produk' }}" 
         icon="fas fa-tags" 
     />

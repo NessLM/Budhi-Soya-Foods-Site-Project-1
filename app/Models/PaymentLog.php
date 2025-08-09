@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -33,4 +32,4 @@ class PaymentLog extends Model
     {
         return $this->belongsTo(Order::class);
     }
-}
+} 

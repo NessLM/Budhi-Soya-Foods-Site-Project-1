@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Controllers;
@@ -99,7 +98,7 @@ class CheckoutController extends Controller
             foreach ($cartItems as $cartItem) {
                 $product = $cartItem->product;
 
-                if ($product->stok < $cartItem->quantity) {
+                if ($product->jumlah_produk < $cartItem->quantity) {
                     throw new \Exception("Stok produk {$product->nama_produk} tidak mencukupi");
                 }
 
@@ -113,7 +112,7 @@ class CheckoutController extends Controller
                 ]);
 
                 // Update stok produk
-                $product->decrement('stok', $cartItem->quantity);
+                $product->decrement('jumlah_produk', $cartItem->quantity);
             }
 
             // Hapus cart items
@@ -131,4 +130,4 @@ class CheckoutController extends Controller
                 ->withInput();
         }
     }
-}
+} 

@@ -25,10 +25,7 @@ class Product extends Model
         'harga' => 'decimal:2',
     ];
 
-    public function cartItems()
-    {
-        return $this->hasMany(Cart::class, 'product_id');
-    }
+
 
     public function orderItems()
     {

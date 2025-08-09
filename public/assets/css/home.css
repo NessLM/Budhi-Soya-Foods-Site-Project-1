@@ -919,6 +919,8 @@ body {
   font-size: 0.95rem;
 }
 
+
+
 /* Login Modal */
 .login-modal {
   display: none;
@@ -945,6 +947,8 @@ body {
   animation: slideIn 0.3s ease;
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
+
+
 
 .close-modal {
   position: absolute;

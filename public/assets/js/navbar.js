@@ -61,4 +61,55 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('navbar-body');
 });
 
-// Login Modals
+// Login Modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.querySelector('.close-modal');
+    
+    // Function to show login modal
+    function showLoginModal() {
+        if (loginModal) {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+    }
+    
+    // Function to hide login modal and restore scrolling
+    function hideLoginModal() {
+        if (loginModal) {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+    }
+    
+    // Close modal event listeners
+    if (closeModal) {
+        closeModal.addEventListener('click', hideLoginModal);
+    }
+    
+    // Close modal when clicking outside
+    if (loginModal) {
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                hideLoginModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && loginModal && loginModal.style.display === 'flex') {
+            hideLoginModal();
+        }
+    });
+    
+    // Handle modal button clicks to restore scrolling
+    const modalButtons = document.querySelectorAll('.modal-login-btn, .modal-register-btn');
+    modalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Restore scrolling when navigating away
+            document.body.style.overflow = 'auto';
+            hideLoginModal(); // Also hide the modal
+        });
+    });
+});

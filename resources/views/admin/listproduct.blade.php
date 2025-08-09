@@ -19,7 +19,7 @@
     <x-admin.asidebar_admin></x-admin.asidebar_admin>
 
     <div class="dashboard-container">
-        <x-admin.atopbar_admin title="Daftar Produk" icon="fa-solid fa-boxes-stacked" />
+        <x-admin.atopbar-admin title="Daftar Produk" icon="fa-solid fa-boxes-stacked" />
 
         <div class="content">
             {{-- Notifikasi --}}

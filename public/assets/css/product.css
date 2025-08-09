@@ -525,6 +525,17 @@ body {
     animation: spin 1s ease-in-out infinite;
 }
 
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #28a745;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

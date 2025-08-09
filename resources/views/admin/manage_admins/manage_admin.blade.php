@@ -19,7 +19,7 @@
 
     <div class="dashboard-container">
         <main class="main-content">
-            <x-admin.atopbar_admin title="Manajemen Admin" icon="fas fa-user-cog" />
+            <x-admin.atopbar-admin title="Manajemen Admin" icon="fas fa-user-cog" />
 
             <section class="content-area">
                 <button id="btnAddAdmin" class="btn btn-green" style="margin-bottom: 1rem;">

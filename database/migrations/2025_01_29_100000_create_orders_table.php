@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('shipping_cost', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2);
             $table->enum('payment_status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
-            $table->enum('payment_method', ['bank_transfer', 'cash_on_delivery', 'ewallet', 'credit_card'])->nullable();
+            $table->enum('payment_method', ['bank_transfer', 'cash_on_delivery', 'ewallet', 'credit_card', 'manual_transfer', 'qris'])->nullable();
             $table->text('notes')->nullable();
             
             // Shipping Address
